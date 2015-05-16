@@ -49,7 +49,7 @@ public class MaterialPreference extends FrameLayout {
     protected int mResIdSummary;
 
     public interface MaterialPreferenceChangeListener {
-        void onPreferenceChanged(MaterialPreference preference, Object newValue);
+        boolean onPreferenceChanged(MaterialPreference preference, Object newValue);
     }
 
     public MaterialPreference(Context context) {
