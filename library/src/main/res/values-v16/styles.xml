@@ -16,18 +16,15 @@
 
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="MaterialPreferences" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorAccent">#009688</item>
-    </style>
-
     <style name="MaterialPreferences.PreferenceTitle">
         <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:textColor">@color/txtColPrimary</item>
     </style>
 
     <style name="MaterialPreferences.PreferenceCategoryTitle">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textColor">@color/txtColPrimary</item>
     </style>
 

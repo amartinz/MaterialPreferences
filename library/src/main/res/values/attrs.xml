@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ Copyright 2015 Alexander Martinz
   ~
@@ -15,20 +16,12 @@
   -->
 
 <resources>
-
-    <!-- Base application theme. -->
-    <style name="MaterialPreferences" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorAccent">#009688</item>
-    </style>
-
-    <style name="MaterialPreferences.PreferenceTitle">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/txtColPrimary</item>
-    </style>
-
-    <style name="MaterialPreferences.PreferenceCategoryTitle">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/txtColPrimary</item>
-    </style>
-
+    <declare-styleable name="MaterialPreference">
+        <attr name="prefKey" format="string" />
+        <attr name="prefIcon" format="reference" />
+        <attr name="prefTitle" format="reference" />
+        <attr name="prefSummary" format="reference" />
+        <attr name="prefAsCard" format="boolean" />
+        <attr name="prefDefaultValue" format="boolean" />
+    </declare-styleable>
 </resources>
