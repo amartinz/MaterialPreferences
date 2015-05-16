@@ -142,7 +142,13 @@ public class MaterialEditTextPreference extends MaterialPreference implements Vi
         builder.setNegativeButton(android.R.string.cancel, null);
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             @Override public void onClick(DialogInterface dialog, int which) {
-                mValue = editText.getText().toString();
+                final String value = editText.getText().toString();
+                if (TextUtils.equals(value, mValue)) {
+                    // the value did not change, so lets end here
+                    return;
+                }
+
+                mValue = value;
                 final MaterialEditTextPreference preference = MaterialEditTextPreference.this;
 
                 if (mListener != null) {
