@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright 2015 Alexander Martinz
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <alexander.martinz.libs.materialpreferences.MaterialPreference
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:prefSummary="@string/dummy_standalone_summary"
+        app:prefTitle="@string/app_name" />
+
+    <alexander.martinz.libs.materialpreferences.MaterialPreference
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:prefAsCard="true"
+        app:prefIcon="@mipmap/ic_launcher"
+        app:prefSummary="@string/dummy_standalone_card_summary"
+        app:prefTitle="@string/app_name" />
+
+    <alexander.martinz.libs.materialpreferences.MaterialPreferenceCategory
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:prefTitle="@string/category_dummy_title">
+
+        <alexander.martinz.libs.materialpreferences.MaterialPreference
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:prefSummary="@string/dummy_summary"
+            app:prefTitle="@string/app_name" />
+
+        <alexander.martinz.libs.materialpreferences.MaterialPreference
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:prefSummary="@string/dummy_summary"
+            app:prefTitle="@string/app_name" />
+
+        <alexander.martinz.libs.materialpreferences.MaterialSwitchPreference
+            android:id="@+id/dummy_switch_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:prefDefaultValue="true"
+            app:prefKey="switch_dummy_one"
+            app:prefSummary="@string/switch_dummy_one_summary"
+            app:prefTitle="@string/switch_dummy_one_title" />
+
+        <alexander.martinz.libs.materialpreferences.MaterialSwitchPreference
+            android:id="@+id/dummy_switch_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:prefKey="switch_dummy_two"
+            app:prefSummary="@string/switch_dummy_two_summary"
+            app:prefTitle="@string/switch_dummy_two_title" />
+
+    </alexander.martinz.libs.materialpreferences.MaterialPreferenceCategory>
+
+    <alexander.martinz.libs.materialpreferences.MaterialPreferenceCategory
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:prefIcon="@mipmap/ic_launcher"
+        app:prefTitle="@string/category_dummy_icon_title">
+
+        <alexander.martinz.libs.materialpreferences.MaterialPreference
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:prefSummary="@string/dummy_summary"
+            app:prefTitle="@string/app_name" />
+
+        <alexander.martinz.libs.materialpreferences.MaterialPreference
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:prefSummary="@string/dummy_summary"
+            app:prefTitle="@string/app_name" />
+
+        <alexander.martinz.libs.materialpreferences.MaterialPreference
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:prefSummary="@string/dummy_summary"
+            app:prefTitle="@string/app_name" />
+
+        <alexander.martinz.libs.materialpreferences.MaterialPreference
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:prefSummary="@string/dummy_summary"
+            app:prefTitle="@string/app_name" />
+
+    </alexander.martinz.libs.materialpreferences.MaterialPreferenceCategory>
+
+</LinearLayout>

@@ -16,4 +16,16 @@
 
 <resources>
     <string name="app_name">MaterialPreferences</string>
+
+    <string name="category_dummy_title">I am a category title!</string>
+    <string name="category_dummy_icon_title">Icon and category title works as well</string>
+    <string name="dummy_summary">I am the awesome summary</string>
+
+    <string name="dummy_standalone_summary">I am a plain preference without card optics</string>
+    <string name="dummy_standalone_card_summary">I am a plain preference with card optics and an icon at my left side</string>
+
+    <string name="switch_dummy_one_title">Automated money generation</string>
+    <string name="switch_dummy_one_summary">Earn money while you are sleeping or watching TV</string>
+    <string name="switch_dummy_two_title">Transparent politics</string>
+    <string name="switch_dummy_two_summary">Stops corruption and grants the privilige to have insight about the state\'s operations to everyone</string>
 </resources>
