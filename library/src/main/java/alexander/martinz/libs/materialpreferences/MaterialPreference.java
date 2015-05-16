@@ -27,12 +27,13 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MaterialPreference extends FrameLayout {
+public class MaterialPreference extends LinearLayout {
+    private boolean mInit;
+
     protected View mView;
     protected MaterialPreferenceChangeListener mListener;
 
@@ -75,12 +76,19 @@ public class MaterialPreference extends FrameLayout {
     }
 
     protected void init(Context context, AttributeSet attrs) {
+        if (mInit) {
+            return;
+        }
+        mInit = true;
+
         TypedArray typedArray = parseAttrs(context, attrs);
         recycleTypedArray(typedArray);
+        setOrientation(LinearLayout.VERTICAL);
 
         int layoutResId = mPrefAsCard ? R.layout.card_preference : R.layout.preference;
 
-        mView = getLayoutInflater().inflate(layoutResId, this, true);
+        mView = getLayoutInflater().inflate(layoutResId, this, false);
+        super.addView(mView);
 
         mIcon = (ImageView) mView.findViewById(android.R.id.icon);
         mTitle = (TextView) mView.findViewById(android.R.id.title);

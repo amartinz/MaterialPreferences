@@ -20,7 +20,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/fragment_preference_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

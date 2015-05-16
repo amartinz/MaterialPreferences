@@ -18,30 +18,23 @@ package alexander.martinz.libs.materialpreferences;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MaterialPreferenceCategory extends LinearLayout {
+public class MaterialPreferenceCategory extends MaterialPreference {
+    private boolean mInit;
+
     protected View mView;
 
     protected ImageView mIcon;
     protected TextView mTitle;
     protected LinearLayout mCardContainer;
-
-    protected String mPrefKey;
-
-    protected int mResIdIcon;
-    protected int mResIdTitle;
 
     public MaterialPreferenceCategory(Context context) {
         super(context);
@@ -65,8 +58,13 @@ public class MaterialPreferenceCategory extends LinearLayout {
         init(context, attrs);
     }
 
-    private void init(Context context, AttributeSet attrs) {
-        parseAttrs(context, attrs);
+    @Override protected void init(Context context, AttributeSet attrs) {
+        if (mInit) {
+            return;
+        }
+        mInit = true;
+
+        super.parseAttrs(context, attrs);
         setOrientation(LinearLayout.VERTICAL);
 
         mView = getLayoutInflater().inflate(R.layout.card_preference_category, this, false);
@@ -126,33 +124,6 @@ public class MaterialPreferenceCategory extends LinearLayout {
             return;
         }
         super.addView(child, index, params);
-    }
-
-    private void parseAttrs(Context context, AttributeSet attrs) {
-        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MaterialPreference);
-
-        if (a == null) {
-            Log.e(this.getClass().getSimpleName(), "Could not obtain typed array!");
-            return;
-        }
-
-        mPrefKey = a.getString(R.styleable.MaterialPreference_prefKey);
-        mResIdIcon = a.getResourceId(R.styleable.MaterialPreference_prefIcon, -1);
-        mResIdTitle = a.getResourceId(R.styleable.MaterialPreference_prefTitle, -1);
-
-        a.recycle();
-    }
-
-    public LayoutInflater getLayoutInflater() {
-        return LayoutInflater.from(getContext());
-    }
-
-    @Nullable public View getRootView() {
-        return mView;
-    }
-
-    @Nullable public String getKey() {
-        return mPrefKey;
     }
 
 }

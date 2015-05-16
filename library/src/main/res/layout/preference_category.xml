@@ -21,6 +21,7 @@
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
     android:gravity="center_vertical"
+    android:orientation="horizontal"
     android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
     android:paddingRight="?android:attr/listPreferredItemPaddingRight">
 
@@ -28,17 +29,16 @@
         android:id="@android:id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="-4dp"
         android:layout_marginLeft="-4dp"
-        android:minWidth="60dp"
+        android:layout_marginStart="-4dp"
         android:gravity="start|center_vertical"
+        android:minWidth="60dp"
         android:orientation="horizontal"
+        android:paddingBottom="4dp"
         android:paddingEnd="12dp"
         android:paddingRight="12dp"
         android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        tools:src="@drawable/abc_btn_rating_star_on_mtrl_alpha"
-        />
+        tools:src="@drawable/abc_btn_rating_star_on_mtrl_alpha" />
 
     <TextView
         android:id="@android:id/title"

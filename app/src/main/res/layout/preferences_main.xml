@@ -35,6 +35,7 @@
         app:prefSummary="@string/dummy_standalone_card_summary"
         app:prefTitle="@string/app_name" />
 
+    <!-- category with all preferences -->
     <alexander.martinz.libs.materialpreferences.MaterialPreferenceCategory
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -80,6 +81,45 @@
 
     </alexander.martinz.libs.materialpreferences.MaterialPreferenceCategory>
 
+    <!-- PREFERENCES STANDALONE AS CARD START -->
+
+    <alexander.martinz.libs.materialpreferences.MaterialListPreference
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:prefAsCard="true"
+        app:prefEntries="@array/list_dummy_one_entries"
+        app:prefEntryValues="@array/list_dummy_one_values"
+        app:prefSummary="@string/list_dummy_one_summary"
+        app:prefTitle="@string/list_dummy_one_title" />
+
+    <alexander.martinz.libs.materialpreferences.MaterialEditTextPreference
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:prefAsCard="true"
+        app:prefDefaultValue="1337"
+        app:prefSummary="@string/edittext_dummy_one_summary"
+        app:prefTextColor="?attr/colorAccent"
+        app:prefTextSize="16"
+        app:prefTitle="@string/edittext_dummy_one_title" />
+
+    <alexander.martinz.libs.materialpreferences.MaterialSwitchPreference
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:prefAsCard="true"
+        app:prefDefaultValue="true"
+        app:prefSummary="@string/switch_dummy_one_summary"
+        app:prefTitle="@string/switch_dummy_one_title" />
+
+    <alexander.martinz.libs.materialpreferences.MaterialSwitchPreference
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:prefAsCard="true"
+        app:prefSummary="@string/switch_dummy_two_summary"
+        app:prefTitle="@string/switch_dummy_two_title" />
+
+    <!-- PREFERENCES STANDALONE AS CARD END -->
+
+    <!-- category just to fill some space -->
     <alexander.martinz.libs.materialpreferences.MaterialPreferenceCategory
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

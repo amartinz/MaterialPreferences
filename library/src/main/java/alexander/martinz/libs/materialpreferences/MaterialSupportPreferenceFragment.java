@@ -21,6 +21,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 public class MaterialSupportPreferenceFragment extends Fragment {
@@ -32,11 +33,12 @@ public class MaterialSupportPreferenceFragment extends Fragment {
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_preference, container, false);
-        LinearLayout v = (LinearLayout) rootView.findViewById(R.id.fragment_preference_container);
+        FrameLayout v = (FrameLayout) rootView.findViewById(R.id.fragment_preference_container);
 
         int layoutResId = getLayoutResourceId();
         if (layoutResId != -1) {
-            inflater.inflate(layoutResId, v, true);
+            View child = inflater.inflate(layoutResId, v, false);
+            v.addView(child);
         }
 
         return rootView;
