@@ -24,6 +24,9 @@
     <string name="dummy_standalone_summary">I am a plain preference without card optics</string>
     <string name="dummy_standalone_card_summary">I am a plain preference with card optics and an icon at my left side</string>
 
+    <string name="list_dummy_one_title">Favorite CPU governor</string>
+    <string name="list_dummy_one_summary">Only geeks will know what it means</string>
+
     <string name="edittext_dummy_one_title">Eaten bananas</string>
     <string name="edittext_dummy_one_summary">Enter the amount of eaten bananas to measure how much monkey you are</string>
 

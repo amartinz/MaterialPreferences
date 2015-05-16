@@ -40,11 +40,15 @@
         android:layout_height="wrap_content"
         app:prefTitle="@string/category_dummy_title">
 
-        <alexander.martinz.libs.materialpreferences.MaterialPreference
+        <alexander.martinz.libs.materialpreferences.MaterialListPreference
+            android:id="@+id/list_dummy_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:prefSummary="@string/dummy_summary"
-            app:prefTitle="@string/app_name" />
+            app:prefEntries="@array/list_dummy_one_entries"
+            app:prefEntryValues="@array/list_dummy_one_values"
+            app:prefKey="list_dummy_one"
+            app:prefSummary="@string/list_dummy_one_summary"
+            app:prefTitle="@string/list_dummy_one_title" />
 
         <alexander.martinz.libs.materialpreferences.MaterialEditTextPreference
             android:id="@+id/edittext_dummy_one"

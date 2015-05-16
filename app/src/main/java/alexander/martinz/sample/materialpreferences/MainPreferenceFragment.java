@@ -21,12 +21,14 @@ import android.view.View;
 import android.widget.Toast;
 
 import alexander.martinz.libs.materialpreferences.MaterialEditTextPreference;
+import alexander.martinz.libs.materialpreferences.MaterialListPreference;
 import alexander.martinz.libs.materialpreferences.MaterialPreference;
 import alexander.martinz.libs.materialpreferences.MaterialSupportPreferenceFragment;
 import alexander.martinz.libs.materialpreferences.MaterialSwitchPreference;
 
 public class MainPreferenceFragment extends MaterialSupportPreferenceFragment implements MaterialPreference.MaterialPreferenceChangeListener {
     private static final String KEY_EDITTEXT_DUMMY_ONE = "edittext_dummy_one";
+    private static final String KEY_LIST_DUMMY_ONE = "list_dummy_one";
     private static final String KEY_SWITCH_DUMMY_ONE = "switch_dummy_one";
     private static final String KEY_SWITCH_DUMMY_TWO = "switch_dummy_two";
 
@@ -45,6 +47,10 @@ public class MainPreferenceFragment extends MaterialSupportPreferenceFragment im
                 (MaterialEditTextPreference) view.findViewById(R.id.edittext_dummy_one);
         dummyEditTextOne.setOnPreferenceChangeListener(this);
 
+        MaterialListPreference dummyListOne =
+                (MaterialListPreference) view.findViewById(R.id.list_dummy_one);
+        dummyListOne.setOnPreferenceChangeListener(this);
+
         MaterialSwitchPreference dummySwitchOne =
                 (MaterialSwitchPreference) view.findViewById(R.id.switch_dummy_one);
         dummySwitchOne.setOnPreferenceChangeListener(this);
@@ -60,6 +66,10 @@ public class MainPreferenceFragment extends MaterialSupportPreferenceFragment im
         final String value = String.valueOf(newValue);
         switch (key) {
             case KEY_EDITTEXT_DUMMY_ONE: {
+                handled = true;
+                break;
+            }
+            case KEY_LIST_DUMMY_ONE: {
                 handled = true;
                 break;
             }

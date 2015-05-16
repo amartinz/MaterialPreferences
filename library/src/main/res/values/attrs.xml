@@ -26,5 +26,9 @@
         <attr name="prefTextColor" format="reference" />
         <attr name="prefTextSize" format="integer" />
         <attr name="prefTextMaxLength" format="integer" />
+
+        <attr name="prefDefaultIndex" format="integer" />
+        <attr name="prefEntries" format="reference" />
+        <attr name="prefEntryValues" format="reference" />
     </declare-styleable>
 </resources>
