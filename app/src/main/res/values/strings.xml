@@ -24,6 +24,9 @@
     <string name="dummy_standalone_summary">I am a plain preference without card optics</string>
     <string name="dummy_standalone_card_summary">I am a plain preference with card optics and an icon at my left side</string>
 
+    <string name="edittext_dummy_one_title">Eaten bananas</string>
+    <string name="edittext_dummy_one_summary">Enter the amount of eaten bananas to measure how much monkey you are</string>
+
     <string name="switch_dummy_one_title">Automated money generation</string>
     <string name="switch_dummy_one_summary">Earn money while you are sleeping or watching TV</string>
     <string name="switch_dummy_two_title">Transparent politics</string>

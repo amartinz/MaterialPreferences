@@ -22,6 +22,9 @@
         <attr name="prefTitle" format="reference" />
         <attr name="prefSummary" format="reference" />
         <attr name="prefAsCard" format="boolean" />
-        <attr name="prefDefaultValue" format="boolean" />
+        <attr name="prefDefaultValue" format="boolean|string" />
+        <attr name="prefTextColor" format="reference" />
+        <attr name="prefTextSize" format="integer" />
+        <attr name="prefTextMaxLength" format="integer" />
     </declare-styleable>
 </resources>
