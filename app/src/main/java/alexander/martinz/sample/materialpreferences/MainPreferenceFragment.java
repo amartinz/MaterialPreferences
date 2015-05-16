@@ -20,11 +20,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import alexander.martinz.libs.materialpreferences.MaterialEditTextPreference;
 import alexander.martinz.libs.materialpreferences.MaterialPreference;
 import alexander.martinz.libs.materialpreferences.MaterialSupportPreferenceFragment;
 import alexander.martinz.libs.materialpreferences.MaterialSwitchPreference;
 
 public class MainPreferenceFragment extends MaterialSupportPreferenceFragment implements MaterialPreference.MaterialPreferenceChangeListener {
+    private static final String KEY_EDITTEXT_DUMMY_ONE = "edittext_dummy_one";
     private static final String KEY_SWITCH_DUMMY_ONE = "switch_dummy_one";
     private static final String KEY_SWITCH_DUMMY_TWO = "switch_dummy_two";
 
@@ -39,28 +41,44 @@ public class MainPreferenceFragment extends MaterialSupportPreferenceFragment im
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        MaterialEditTextPreference dummyEditTextOne =
+                (MaterialEditTextPreference) view.findViewById(R.id.edittext_dummy_one);
+        dummyEditTextOne.setOnPreferenceChangeListener(this);
+
         MaterialSwitchPreference dummySwitchOne =
-                (MaterialSwitchPreference) view.findViewById(R.id.dummy_switch_one);
+                (MaterialSwitchPreference) view.findViewById(R.id.switch_dummy_one);
         dummySwitchOne.setOnPreferenceChangeListener(this);
 
         MaterialSwitchPreference dummySwitchTwo =
-                (MaterialSwitchPreference) view.findViewById(R.id.dummy_switch_two);
+                (MaterialSwitchPreference) view.findViewById(R.id.switch_dummy_two);
         dummySwitchTwo.setOnPreferenceChangeListener(this);
     }
 
-    @Override public void onPreferenceChanged(MaterialPreference preference, Object newValue) {
+    @Override public boolean onPreferenceChanged(MaterialPreference preference, Object newValue) {
+        final boolean handled;
         final String key = preference.getKey();
+        final String value = String.valueOf(newValue);
         switch (key) {
+            case KEY_EDITTEXT_DUMMY_ONE: {
+                handled = true;
+                break;
+            }
             case KEY_SWITCH_DUMMY_ONE: {
-                // TODO specific handling
+                handled = true;
                 break;
             }
             case KEY_SWITCH_DUMMY_TWO: {
-                // TODO specific handling
+                handled = true;
+                break;
+            }
+            default: {
+                handled = false;
                 break;
             }
         }
-        makeToast(String.format("%s -> %s", key, String.valueOf(newValue)));
+        makeToast(String.format("%s -> %s | handled -> %s", key, value, handled));
+
+        return handled;
     }
 
     private void makeToast(String message) {

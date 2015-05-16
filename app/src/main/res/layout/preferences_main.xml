@@ -46,14 +46,19 @@
             app:prefSummary="@string/dummy_summary"
             app:prefTitle="@string/app_name" />
 
-        <alexander.martinz.libs.materialpreferences.MaterialPreference
+        <alexander.martinz.libs.materialpreferences.MaterialEditTextPreference
+            android:id="@+id/edittext_dummy_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:prefSummary="@string/dummy_summary"
-            app:prefTitle="@string/app_name" />
+            app:prefDefaultValue="1337"
+            app:prefKey="edittext_dummy_one"
+            app:prefSummary="@string/edittext_dummy_one_summary"
+            app:prefTextColor="?attr/colorAccent"
+            app:prefTextSize="16"
+            app:prefTitle="@string/edittext_dummy_one_title" />
 
         <alexander.martinz.libs.materialpreferences.MaterialSwitchPreference
-            android:id="@+id/dummy_switch_one"
+            android:id="@+id/switch_dummy_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:prefDefaultValue="true"
@@ -62,7 +67,7 @@
             app:prefTitle="@string/switch_dummy_one_title" />
 
         <alexander.martinz.libs.materialpreferences.MaterialSwitchPreference
-            android:id="@+id/dummy_switch_two"
+            android:id="@+id/switch_dummy_two"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:prefKey="switch_dummy_two"
