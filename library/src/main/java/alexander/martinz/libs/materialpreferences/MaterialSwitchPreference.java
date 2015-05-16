@@ -24,9 +24,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.SwitchCompat;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.widget.CompoundButton;
 
-public class MaterialSwitchPreference extends MaterialPreference implements CompoundButton.OnCheckedChangeListener {
+public class MaterialSwitchPreference extends MaterialPreference implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
     private SwitchCompat mSwitch;
 
     private boolean mDefaultValue;
@@ -62,6 +63,8 @@ public class MaterialSwitchPreference extends MaterialPreference implements Comp
             addToWidgetFrame(mSwitch);
             mSwitch.setOnCheckedChangeListener(this);
         }
+
+        this.setOnClickListener(this);
     }
 
     protected TypedArray parseAttrs(Context context, AttributeSet attrs) {
@@ -86,4 +89,9 @@ public class MaterialSwitchPreference extends MaterialPreference implements Comp
             mListener.onPreferenceChanged(this, isChecked);
         }
     }
+
+    @Override public void onClick(View v) {
+        mSwitch.toggle();
+    }
+
 }
