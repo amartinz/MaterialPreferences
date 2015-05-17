@@ -60,12 +60,27 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
     }
 
     /**
+     * Creates a new instance with empty key.
+     *
+     * @see MaterialPreference#MaterialPreference(Context)
+     */
+    public MaterialPreference(Context context) {
+        this(context, "");
+    }
+
+    /**
      * General constructor, where you need to set up your values and call {@link #init(Context)} yourself!
      *
      * @param context Your activities context
+     * @param key     The key for the preference
      */
-    public MaterialPreference(Context context) {
+    public MaterialPreference(Context context, String key) {
         super(context);
+        mPrefKey = key;
+        mPrefAsCard = false;
+        mResIdIcon = -1;
+        mResIdTitle = -1;
+        mResIdSummary = -1;
     }
 
     public MaterialPreference(Context context, AttributeSet attrs) {
