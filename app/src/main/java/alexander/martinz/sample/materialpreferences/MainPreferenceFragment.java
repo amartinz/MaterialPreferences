@@ -61,6 +61,8 @@ public class MainPreferenceFragment extends MaterialSupportPreferenceFragment im
         final MaterialSwitchPreference dummySwitchTwo =
                 (MaterialSwitchPreference) view.findViewById(R.id.switch_dummy_two);
         dummySwitchTwo.setOnPreferenceChangeListener(this);
+        // TODO: implement attrs support
+        dummySwitchTwo.setSelectable(false);
 
         final MaterialPreferenceCategory dynamicCategory =
                 (MaterialPreferenceCategory) view.findViewById(R.id.category_dynamic);

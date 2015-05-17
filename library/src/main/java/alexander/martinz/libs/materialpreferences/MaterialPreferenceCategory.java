@@ -19,6 +19,7 @@ package alexander.martinz.libs.materialpreferences;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.preference.Preference;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
@@ -63,7 +64,6 @@ public class MaterialPreferenceCategory extends MaterialPreference {
         if (attrs != null) {
             super.parseAttrs(context, attrs);
         }
-        setOrientation(LinearLayout.VERTICAL);
 
         mView = getLayoutInflater().inflate(R.layout.card_preference_category, this, false);
         super.addView(mView);
@@ -80,7 +80,8 @@ public class MaterialPreferenceCategory extends MaterialPreference {
             mTitle.setText(mResIdTitle);
         }
 
-        setOnClickListener(this);
+        setSelectable(false);
+        setOrientation(LinearLayout.VERTICAL);
     }
 
     @NonNull public LinearLayout getPreferenceContainer() {

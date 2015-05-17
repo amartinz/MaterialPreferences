@@ -26,12 +26,13 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MaterialPreference extends LinearLayout implements View.OnClickListener {
+public class MaterialPreference extends LinearLayout implements View.OnClickListener, View.OnTouchListener {
     private boolean mInit;
 
     protected View mView;
@@ -50,6 +51,8 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
     protected int mResIdIcon;
     protected int mResIdTitle;
     protected int mResIdSummary;
+
+    protected boolean mSelectable;
 
     public interface MaterialPreferenceChangeListener {
         boolean onPreferenceChanged(MaterialPreference preference, Object newValue);
@@ -114,7 +117,6 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
             TypedArray typedArray = parseAttrs(context, attrs);
             recycleTypedArray(typedArray);
         }
-        setOrientation(LinearLayout.VERTICAL);
 
         int layoutResId = mPrefAsCard ? R.layout.card_preference : R.layout.preference;
 
@@ -137,7 +139,11 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
             mSummary.setText(mResIdSummary);
         }
 
+        setSelectable(true);
         setOnClickListener(this);
+        setOnTouchListener(this);
+
+        setOrientation(LinearLayout.VERTICAL);
     }
 
     protected TypedArray parseAttrs(Context context, AttributeSet attrs) {
@@ -164,9 +170,16 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
     }
 
     @Override public void onClick(View v) {
-        if (mClickListener != null) {
+        if (mSelectable && mClickListener != null) {
             mClickListener.onPreferenceClicked(this);
         }
+    }
+
+    @Override public boolean onTouch(View v, MotionEvent event) {
+        if (!mSelectable) {
+            return true;
+        }
+        return false;
     }
 
     public LayoutInflater getLayoutInflater() {
@@ -200,6 +213,16 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
 
     @Nullable public MaterialPreferenceChangeListener getOnPreferenceChangeListener() {
         return mListener;
+    }
+
+    public boolean isSelectable() {
+        return mSelectable;
+    }
+
+    public <T extends MaterialPreference> T setSelectable(boolean isSelectable) {
+        mSelectable = isSelectable;
+        setClickable(mSelectable);
+        return (T) this;
     }
 
     @NonNull public ImageView getIconView() {

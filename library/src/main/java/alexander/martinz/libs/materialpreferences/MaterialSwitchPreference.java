@@ -95,4 +95,11 @@ public class MaterialSwitchPreference extends MaterialPreference implements Comp
         mSwitch.toggle();
     }
 
+    @Override public <T extends MaterialPreference> T setSelectable(boolean isSelectable) {
+        super.setSelectable(isSelectable);
+        if (mSwitch != null) {
+            mSwitch.setClickable(isSelectable);
+        }
+        return (T) this;
+    }
 }
