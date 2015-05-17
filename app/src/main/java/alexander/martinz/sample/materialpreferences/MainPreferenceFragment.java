@@ -66,8 +66,8 @@ public class MainPreferenceFragment extends MaterialSupportPreferenceFragment im
 
         final MaterialPreferenceCategory dynamicCategory =
                 (MaterialPreferenceCategory) view.findViewById(R.id.category_dynamic);
-        addPreference(dynamicCategory, "dummy1", "Dynamic preference 1", "I got dynamically added");
-        addPreference(dynamicCategory, "dummy2", "Dynamic preference 2", "Click me!")
+        addPreference(dynamicCategory, "dummy1", "Dynamic material_prefs_preference 1", "I got dynamically added");
+        addPreference(dynamicCategory, "dummy2", "Dynamic material_prefs_preference 2", "Click me!")
                 .setOnPreferenceClickListener(this);
         addPreference(dynamicCategory, "dummy3", "Dynamic adsfasfd 3", "You may touch me as well")
                 .setOnPreferenceClickListener(this);

@@ -33,7 +33,7 @@ public class MaterialSupportPreferenceFragment extends Fragment {
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_preference, container, false);
+        View rootView = inflater.inflate(R.layout.material_prefs_fragment_preference, container, false);
         LinearLayout v = (LinearLayout) rootView.findViewById(R.id.fragment_preference_container);
 
         int layoutResId = getLayoutResourceId();

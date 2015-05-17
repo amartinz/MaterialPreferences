@@ -19,7 +19,6 @@ package alexander.martinz.libs.materialpreferences;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
-import android.preference.Preference;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
@@ -65,7 +64,7 @@ public class MaterialPreferenceCategory extends MaterialPreference {
             super.parseAttrs(context, attrs);
         }
 
-        mView = getLayoutInflater().inflate(R.layout.card_preference_category, this, false);
+        mView = getLayoutInflater().inflate(R.layout.material_prefs_card_preference_category, this, false);
         super.addView(mView);
 
         mIcon = (ImageView) mView.findViewById(android.R.id.icon);

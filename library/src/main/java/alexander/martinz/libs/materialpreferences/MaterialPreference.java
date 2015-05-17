@@ -118,7 +118,7 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
             recycleTypedArray(typedArray);
         }
 
-        int layoutResId = mPrefAsCard ? R.layout.card_preference : R.layout.preference;
+        int layoutResId = mPrefAsCard ? R.layout.material_prefs_card_preference : R.layout.material_prefs_preference;
 
         mView = getLayoutInflater().inflate(layoutResId, this, false);
         super.addView(mView);
