@@ -155,6 +155,8 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
         mValue = value;
         int position = mSpinnerAdapter.getPosition(mValue);
         if (position != -1) {
+            // set a tag to prevent the onitemselected listener from triggering
+            mSpinner.setTag(position);
             mSpinner.setSelection(position);
         }
         return (T) this;
@@ -202,6 +204,11 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
     }
 
     @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // we have set a value, do not fire the listener
+        if (mSpinner.getTag() == position) {
+            return;
+        }
+
         final String value;
         if (mEntryValues != null && position < mEntryValues.length) {
             value = String.valueOf(mEntryValues[position]);
