@@ -78,8 +78,6 @@ public class MaterialPreferenceCategory extends MaterialPreference {
         }
         if (mResIdTitle != -1) {
             mTitle.setText(mResIdTitle);
-        } else {
-            mTitle.setVisibility(View.GONE);
         }
 
         setOnClickListener(this);
@@ -90,16 +88,12 @@ public class MaterialPreferenceCategory extends MaterialPreference {
     }
 
     public MaterialPreferenceCategory addPreference(MaterialPreference preference) {
-        if (mCardContainer != null) {
-            mCardContainer.addView(preference);
-        }
+        addView(preference);
         return this;
     }
 
     public MaterialPreferenceCategory addPreference(MaterialPreference preference, int index) {
-        if (mCardContainer != null) {
-            mCardContainer.addView(preference, index);
-        }
+        addView(preference, index);
         return this;
     }
 

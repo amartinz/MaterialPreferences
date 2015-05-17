@@ -75,7 +75,7 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
      * @param key     The key for the preference
      */
     public MaterialPreference(Context context, String key) {
-        super(context);
+        super(context, null);
         mPrefKey = key;
         mPrefAsCard = false;
         mResIdIcon = -1;
@@ -132,13 +132,9 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
         }
         if (mResIdTitle != -1) {
             mTitle.setText(mResIdTitle);
-        } else {
-            mTitle.setVisibility(View.GONE);
         }
         if (mResIdSummary != -1) {
             mSummary.setText(mResIdSummary);
-        } else {
-            mSummary.setVisibility(View.GONE);
         }
 
         setOnClickListener(this);

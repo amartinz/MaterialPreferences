@@ -81,6 +81,13 @@
 
     </alexander.martinz.libs.materialpreferences.MaterialPreferenceCategory>
 
+    <!-- category with dynamically added preferences -->
+    <alexander.martinz.libs.materialpreferences.MaterialPreferenceCategory
+        android:id="@+id/category_dynamic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:prefTitle="@string/category_dynamic_title" />
+
     <!-- PREFERENCES STANDALONE AS CARD START -->
 
     <alexander.martinz.libs.materialpreferences.MaterialListPreference

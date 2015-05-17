@@ -16,17 +16,20 @@
 
 package alexander.martinz.sample.materialpreferences;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
 import alexander.martinz.libs.materialpreferences.MaterialEditTextPreference;
 import alexander.martinz.libs.materialpreferences.MaterialListPreference;
 import alexander.martinz.libs.materialpreferences.MaterialPreference;
+import alexander.martinz.libs.materialpreferences.MaterialPreferenceCategory;
 import alexander.martinz.libs.materialpreferences.MaterialSupportPreferenceFragment;
 import alexander.martinz.libs.materialpreferences.MaterialSwitchPreference;
 
-public class MainPreferenceFragment extends MaterialSupportPreferenceFragment implements MaterialPreference.MaterialPreferenceChangeListener {
+public class MainPreferenceFragment extends MaterialSupportPreferenceFragment implements MaterialPreference.MaterialPreferenceChangeListener, MaterialPreference.MaterialPreferenceClickListener {
     private static final String KEY_EDITTEXT_DUMMY_ONE = "edittext_dummy_one";
     private static final String KEY_LIST_DUMMY_ONE = "list_dummy_one";
     private static final String KEY_SWITCH_DUMMY_ONE = "switch_dummy_one";
@@ -43,21 +46,41 @@ public class MainPreferenceFragment extends MaterialSupportPreferenceFragment im
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        MaterialEditTextPreference dummyEditTextOne =
+        final MaterialEditTextPreference dummyEditTextOne =
                 (MaterialEditTextPreference) view.findViewById(R.id.edittext_dummy_one);
         dummyEditTextOne.setOnPreferenceChangeListener(this);
 
-        MaterialListPreference dummyListOne =
+        final MaterialListPreference dummyListOne =
                 (MaterialListPreference) view.findViewById(R.id.list_dummy_one);
         dummyListOne.setOnPreferenceChangeListener(this);
 
-        MaterialSwitchPreference dummySwitchOne =
+        final MaterialSwitchPreference dummySwitchOne =
                 (MaterialSwitchPreference) view.findViewById(R.id.switch_dummy_one);
         dummySwitchOne.setOnPreferenceChangeListener(this);
 
-        MaterialSwitchPreference dummySwitchTwo =
+        final MaterialSwitchPreference dummySwitchTwo =
                 (MaterialSwitchPreference) view.findViewById(R.id.switch_dummy_two);
         dummySwitchTwo.setOnPreferenceChangeListener(this);
+
+        final MaterialPreferenceCategory dynamicCategory =
+                (MaterialPreferenceCategory) view.findViewById(R.id.category_dynamic);
+        addPreference(dynamicCategory, "dummy1", "Dynamic preference 1", "I got dynamically added");
+        addPreference(dynamicCategory, "dummy2", "Dynamic preference 2", "Click me!")
+                .setOnPreferenceClickListener(this);
+        addPreference(dynamicCategory, "dummy3", "Dynamic adsfasfd 3", "You may touch me as well")
+                .setOnPreferenceClickListener(this);
+    }
+
+    private MaterialPreference addPreference(final MaterialPreferenceCategory category,
+            final String key, final String title, final String summary) {
+        final Context context = getActivity();
+        final MaterialPreference preference = new MaterialPreference(context);
+        preference.init(context);
+        preference.setKey(key);
+        preference.setTitle(title);
+        preference.setSummary(TextUtils.isEmpty(summary) ? "---" : summary);
+        category.addPreference(preference);
+        return preference;
     }
 
     @Override public boolean onPreferenceChanged(MaterialPreference preference, Object newValue) {
@@ -89,6 +112,15 @@ public class MainPreferenceFragment extends MaterialSupportPreferenceFragment im
         makeToast(String.format("%s -> %s | handled -> %s", key, value, handled));
 
         return handled;
+    }
+
+    @Override public boolean onPreferenceClicked(MaterialPreference preference) {
+        final String key = preference.getKey();
+        final String title = preference.getTitle();
+
+        makeToast(String.format("key -> %s | title -> %s", key, title));
+
+        return true;
     }
 
     private void makeToast(String message) {

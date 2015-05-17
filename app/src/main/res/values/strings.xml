@@ -34,4 +34,6 @@
     <string name="switch_dummy_one_summary">Earn money while you are sleeping or watching TV</string>
     <string name="switch_dummy_two_title">Transparent politics</string>
     <string name="switch_dummy_two_summary">Stops corruption and grants the privilige to have insight about the state\'s operations to everyone</string>
+
+    <string name="category_dynamic_title">Category for dynamically created preferences</string>
 </resources>
