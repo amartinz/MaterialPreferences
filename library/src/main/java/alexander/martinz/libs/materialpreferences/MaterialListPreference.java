@@ -135,7 +135,8 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
     }
 
     public void setAdapter(ArrayAdapter<CharSequence> adapter) {
-        mSpinner.setAdapter(adapter);
+        mSpinnerAdapter = adapter;
+        mSpinner.setAdapter(mSpinnerAdapter);
     }
 
     @NonNull public Spinner getSpinner() {
