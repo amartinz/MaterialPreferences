@@ -67,6 +67,10 @@ public class MaterialSupportPreferenceFragment extends Fragment {
                 summary, getUnknown());
     }
 
+    public MaterialPreferenceCategory createPreferenceCategory(String key, String title) {
+        return MaterialPreferenceFactory.createPreferenceCategory(getActivity(), key, title);
+    }
+
     public MaterialSwitchPreference createSwitchPreference(boolean isCard, String key, String title,
             String summary, boolean isChecked) {
         return MaterialPreferenceFactory.createSwitchPreference(getActivity(), isCard, key, title,
