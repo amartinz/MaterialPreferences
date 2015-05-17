@@ -17,6 +17,7 @@
 package alexander.martinz.libs.materialpreferences;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,25 +25,64 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 public class MaterialSupportPreferenceFragment extends Fragment {
+    protected LinearLayout mFragmentPreferenceContainer;
 
     protected int getLayoutResourceId() {
         return -1;
+    }
+
+    protected String getUnknown() {
+        return "---";
     }
 
     public MaterialSupportPreferenceFragment() { }
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.material_prefs_fragment_preference, container, false);
-        LinearLayout v = (LinearLayout) rootView.findViewById(R.id.fragment_preference_container);
+        View rootView =
+                inflater.inflate(R.layout.material_prefs_fragment_preference, container, false);
+        mFragmentPreferenceContainer =
+                (LinearLayout) rootView.findViewById(R.id.fragment_preference_container);
 
         int layoutResId = getLayoutResourceId();
         if (layoutResId != -1) {
-            View child = inflater.inflate(layoutResId, v, false);
-            v.addView(child);
+            View child = inflater.inflate(layoutResId, mFragmentPreferenceContainer, false);
+            mFragmentPreferenceContainer.addView(child);
         }
 
         return rootView;
+    }
+
+    @NonNull public LinearLayout getPreferenceContainer() {
+        return mFragmentPreferenceContainer;
+    }
+
+    public void addPreference(View preference) {
+        mFragmentPreferenceContainer.addView(preference);
+    }
+
+    public MaterialPreference createPreference(boolean isCard, String key, String title,
+            String summary) {
+        return MaterialPreferenceFactory.createPreference(getActivity(), isCard, key, title,
+                summary, getUnknown());
+    }
+
+    public MaterialSwitchPreference createSwitchPreference(boolean isCard, String key, String title,
+            String summary, boolean isChecked) {
+        return MaterialPreferenceFactory.createSwitchPreference(getActivity(), isCard, key, title,
+                summary, getUnknown(), isChecked);
+    }
+
+    public MaterialEditTextPreference createEditTextPreference(boolean isCard, String key,
+            String title, String summary, String value) {
+        return MaterialPreferenceFactory.createEditTextPreference(getActivity(), isCard, key, title,
+                summary, getUnknown(), value);
+    }
+
+    public MaterialListPreference createListPreference(boolean isCard, String key,
+            String title, String summary) {
+        return MaterialPreferenceFactory.createListPreference(getActivity(), isCard, key, title,
+                summary, getUnknown());
     }
 
 }

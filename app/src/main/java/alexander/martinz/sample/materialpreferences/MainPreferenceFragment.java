@@ -46,6 +46,12 @@ public class MainPreferenceFragment extends MaterialSupportPreferenceFragment im
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setupPreferenceChangeListenerDemo(view);
+        setupDynamicCategoryDemo(view);
+        setupGenerateDemo();
+    }
+
+    private void setupPreferenceChangeListenerDemo(View view) {
         final MaterialEditTextPreference dummyEditTextOne =
                 (MaterialEditTextPreference) view.findViewById(R.id.edittext_dummy_one);
         dummyEditTextOne.setOnPreferenceChangeListener(this);
@@ -63,17 +69,65 @@ public class MainPreferenceFragment extends MaterialSupportPreferenceFragment im
         dummySwitchTwo.setOnPreferenceChangeListener(this);
         // TODO: implement attrs support
         dummySwitchTwo.setSelectable(false);
+    }
 
+    private void setupDynamicCategoryDemo(View view) {
         final MaterialPreferenceCategory dynamicCategory =
                 (MaterialPreferenceCategory) view.findViewById(R.id.category_dynamic);
-        addPreference(dynamicCategory, "dummy1", "Dynamic material_prefs_preference 1", "I got dynamically added");
-        addPreference(dynamicCategory, "dummy2", "Dynamic material_prefs_preference 2", "Click me!")
+
+        addPreferenceToCategory(dynamicCategory, "dummy1",
+                "Dynamic material_prefs_preference 1", "I got dynamically added");
+
+        addPreferenceToCategory(dynamicCategory, "dummy2",
+                "Dynamic material_prefs_preference 2", "Click me!")
                 .setOnPreferenceClickListener(this);
-        addPreference(dynamicCategory, "dummy3", "Dynamic adsfasfd 3", "You may touch me as well")
+
+        addPreferenceToCategory(dynamicCategory, "dummy3",
+                "Dynamic adsfasfd 3", "You may touch me as well")
                 .setOnPreferenceClickListener(this);
     }
 
-    private MaterialPreference addPreference(final MaterialPreferenceCategory category,
+    private void setupGenerateDemo() {
+        final MaterialPreference generatedOne = createPreference(false,
+                "generated1", "Generated 1", "i am generated and dont do much");
+        addPreference(generatedOne);
+
+        final MaterialPreference generatedTwo = createPreference(true,
+                "generated2", "Generated 2", "at least i look like a card...");
+        addPreference(generatedTwo);
+
+        final MaterialSwitchPreference generatedSwitchOne = createSwitchPreference(false,
+                "generatedSwitch1", "Generated switch 1", "i am generated", false);
+        addPreference(generatedSwitchOne);
+
+        final MaterialSwitchPreference generatedSwitchTwo = createSwitchPreference(false,
+                "generatedSwitch2", "Generated switch 2", "i am generated AND checked", true);
+        addPreference(generatedSwitchTwo);
+
+        final MaterialSwitchPreference generatedSwitchThree = createSwitchPreference(true,
+                "generatedSwitch3", "Generated switch 3", "i am generated AND checked AND a card",
+                true);
+        addPreference(generatedSwitchThree);
+
+        final MaterialEditTextPreference generatedEditTextOne = createEditTextPreference(false,
+                "generatedEditText1", "Generated EditText 1", "Isn\'t this awesome?!", "no way");
+        addPreference(generatedEditTextOne);
+
+        final MaterialListPreference generatedListOne = createListPreference(true,
+                "generatedList1", "Generated List 1", "What is the point in this?");
+        addPreference(generatedListOne);
+
+        final MaterialListPreference generatedListTwo = createListPreference(false,
+                "generatedList2", "Generated List 2", "What is my favorite drink?");
+        generatedListTwo.setAdapter(generatedListTwo.createAdapter(
+                new CharSequence[]{ "Coffee", "Chocolate", "Blood" },
+                new CharSequence[]{ "1", "2", "3" }
+        ));
+        generatedListTwo.setOnPreferenceChangeListener(this);
+        addPreference(generatedListTwo);
+    }
+
+    private MaterialPreference addPreferenceToCategory(final MaterialPreferenceCategory category,
             final String key, final String title, final String summary) {
         final Context context = getActivity();
         final MaterialPreference preference = new MaterialPreference(context);

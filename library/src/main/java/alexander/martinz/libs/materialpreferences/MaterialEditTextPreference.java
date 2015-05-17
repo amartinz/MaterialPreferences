@@ -47,24 +47,23 @@ public class MaterialEditTextPreference extends MaterialPreference implements Vi
 
     public MaterialEditTextPreference(Context context) {
         super(context);
-        init(context, null);
+        mPrefTextColor = -1;
+        mPrefTextSize = -1;
+        mPrefTextMaxLength = 25;
     }
 
     public MaterialEditTextPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs);
     }
 
     public MaterialEditTextPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public MaterialEditTextPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init(context, attrs);
     }
 
     @Override public void init(Context context, AttributeSet attrs) {
@@ -122,7 +121,7 @@ public class MaterialEditTextPreference extends MaterialPreference implements Vi
     protected AlertDialog createAlertDialog() {
         final Context context = getContext();
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(mResIdTitle);
+        builder.setTitle(getTitle());
 
         // create the wrapper layout to apply margins to the edit text
         final LinearLayout wrapper = new LinearLayout(context);
@@ -165,11 +164,26 @@ public class MaterialEditTextPreference extends MaterialPreference implements Vi
         return builder.create();
     }
 
-    public void setText(String text) {
+    public <T extends MaterialPreference> T setValue(String value) {
+        mValue = value;
+        setText(value);
+
+        return (T) this;
+    }
+
+    public <T extends MaterialPreference> T setText(String text) {
         if (mPrefTextMaxLength != -1 && text.length() > mPrefTextMaxLength) {
             text = String.format("%s%s", text.substring(0, mPrefTextMaxLength), "…");
         }
         mEditTextValue.setText(text);
+
+        return (T) this;
+    }
+
+    public <T extends MaterialPreference> T setTextColor(int color) {
+        mEditTextValue.setTextColor(color);
+
+        return (T) this;
     }
 
 }

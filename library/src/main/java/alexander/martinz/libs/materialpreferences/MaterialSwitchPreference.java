@@ -34,24 +34,20 @@ public class MaterialSwitchPreference extends MaterialPreference implements Comp
 
     public MaterialSwitchPreference(Context context) {
         super(context);
-        init(context, null);
     }
 
     public MaterialSwitchPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs);
     }
 
     public MaterialSwitchPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public MaterialSwitchPreference(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init(context, attrs);
     }
 
     @Override public void init(Context context, AttributeSet attrs) {
@@ -82,6 +78,15 @@ public class MaterialSwitchPreference extends MaterialPreference implements Comp
 
     @NonNull public SwitchCompat getSwitch() {
         return mSwitch;
+    }
+
+    public boolean isChecked() {
+        return mSwitch.isChecked();
+    }
+
+    public <T extends MaterialPreference> T setChecked(boolean isChecked) {
+        mSwitch.setChecked(isChecked);
+        return (T) this;
     }
 
     @Override public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
