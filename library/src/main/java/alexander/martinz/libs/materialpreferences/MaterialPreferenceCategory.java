@@ -86,6 +86,24 @@ public class MaterialPreferenceCategory extends MaterialPreference {
         }
     }
 
+    @NonNull public LinearLayout getPreferenceContainer() {
+        return mCardContainer;
+    }
+
+    public MaterialPreferenceCategory addPreference(MaterialPreference preference) {
+        if (mCardContainer != null) {
+            mCardContainer.addView(preference);
+        }
+        return this;
+    }
+
+    public MaterialPreferenceCategory addPreference(MaterialPreference preference, int index) {
+        if (mCardContainer != null) {
+            mCardContainer.addView(preference, index);
+        }
+        return this;
+    }
+
     @Override public void addView(@NonNull View child) {
         if (mCardContainer != null) {
             mCardContainer.addView(child);

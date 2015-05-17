@@ -43,8 +43,9 @@ public class MaterialPreference extends LinearLayout {
     protected LinearLayout mWidgetFrame;
 
     protected String mPrefKey;
-    protected boolean mPrefAsCard;
 
+    // can not be modified, used at initialization
+    protected boolean mPrefAsCard;
     protected int mResIdIcon;
     protected int mResIdTitle;
     protected int mResIdSummary;
@@ -154,8 +155,28 @@ public class MaterialPreference extends LinearLayout {
         return (T) this;
     }
 
-    @Nullable public View getRootView() {
+    @NonNull public View getRootView() {
         return mView;
+    }
+
+    @Nullable public MaterialPreferenceChangeListener getOnPreferenceChangeListener() {
+        return mListener;
+    }
+
+    @NonNull public ImageView getIconView() {
+        return mIcon;
+    }
+
+    @NonNull public TextView getTitleView() {
+        return mTitle;
+    }
+
+    @NonNull public TextView getSummaryView() {
+        return mSummary;
+    }
+
+    @Nullable public LinearLayout getWidgetFrame() {
+        return mWidgetFrame;
     }
 
     @NonNull public String getKey() {
@@ -163,6 +184,29 @@ public class MaterialPreference extends LinearLayout {
             return "";
         }
         return mPrefKey;
+    }
+
+    public <T extends MaterialPreference> T setKey(String key) {
+        mPrefKey = key;
+        return (T) this;
+    }
+
+    @Nullable public String getTitle() {
+        return mTitle.getText().toString();
+    }
+
+    public <T extends MaterialPreference> T setTitle(String title) {
+        mTitle.setText(title);
+        return (T) this;
+    }
+
+    @Nullable public String getSummary() {
+        return mSummary.getText().toString();
+    }
+
+    public <T extends MaterialPreference> T setSummary(String summary) {
+        mSummary.setText(summary);
+        return (T) this;
     }
 
 }
