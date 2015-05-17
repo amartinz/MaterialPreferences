@@ -67,7 +67,7 @@ public class MaterialEditTextPreference extends MaterialPreference implements Vi
         init(context, attrs);
     }
 
-    protected void init(Context context, AttributeSet attrs) {
+    @Override public void init(Context context, AttributeSet attrs) {
         super.init(context, attrs);
 
         if (mEditTextValue == null) {
@@ -92,7 +92,7 @@ public class MaterialEditTextPreference extends MaterialPreference implements Vi
         this.setOnClickListener(this);
     }
 
-    protected TypedArray parseAttrs(Context context, AttributeSet attrs) {
+    @Override protected TypedArray parseAttrs(Context context, AttributeSet attrs) {
         final TypedArray a = super.parseAttrs(context, attrs);
 
         if (a == null) {

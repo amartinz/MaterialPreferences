@@ -58,13 +58,15 @@ public class MaterialPreferenceCategory extends MaterialPreference {
         init(context, attrs);
     }
 
-    @Override protected void init(Context context, AttributeSet attrs) {
+    @Override public void init(Context context, AttributeSet attrs) {
         if (mInit) {
             return;
         }
         mInit = true;
 
-        super.parseAttrs(context, attrs);
+        if (attrs != null) {
+            super.parseAttrs(context, attrs);
+        }
         setOrientation(LinearLayout.VERTICAL);
 
         mView = getLayoutInflater().inflate(R.layout.card_preference_category, this, false);
@@ -84,6 +86,24 @@ public class MaterialPreferenceCategory extends MaterialPreference {
         } else {
             mTitle.setVisibility(View.GONE);
         }
+    }
+
+    @NonNull public LinearLayout getPreferenceContainer() {
+        return mCardContainer;
+    }
+
+    public MaterialPreferenceCategory addPreference(MaterialPreference preference) {
+        if (mCardContainer != null) {
+            mCardContainer.addView(preference);
+        }
+        return this;
+    }
+
+    public MaterialPreferenceCategory addPreference(MaterialPreference preference, int index) {
+        if (mCardContainer != null) {
+            mCardContainer.addView(preference, index);
+        }
+        return this;
     }
 
     @Override public void addView(@NonNull View child) {

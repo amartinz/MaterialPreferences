@@ -43,8 +43,9 @@ public class MaterialPreference extends LinearLayout {
     protected LinearLayout mWidgetFrame;
 
     protected String mPrefKey;
-    protected boolean mPrefAsCard;
 
+    // only useful to modify if the general constructor is used and manually init'ed
+    protected boolean mPrefAsCard;
     protected int mResIdIcon;
     protected int mResIdTitle;
     protected int mResIdSummary;
@@ -53,9 +54,13 @@ public class MaterialPreference extends LinearLayout {
         boolean onPreferenceChanged(MaterialPreference preference, Object newValue);
     }
 
+    /**
+     * General constructor, where you need to set up your values and call {@link #init(Context)} yourself!
+     *
+     * @param context Your activities context
+     */
     public MaterialPreference(Context context) {
         super(context);
-        init(context, null);
     }
 
     public MaterialPreference(Context context, AttributeSet attrs) {
@@ -75,14 +80,20 @@ public class MaterialPreference extends LinearLayout {
         init(context, attrs);
     }
 
-    protected void init(Context context, AttributeSet attrs) {
+    public void init(Context context) {
+        init(context, null);
+    }
+
+    public void init(Context context, AttributeSet attrs) {
         if (mInit) {
             return;
         }
         mInit = true;
 
-        TypedArray typedArray = parseAttrs(context, attrs);
-        recycleTypedArray(typedArray);
+        if (attrs != null) {
+            TypedArray typedArray = parseAttrs(context, attrs);
+            recycleTypedArray(typedArray);
+        }
         setOrientation(LinearLayout.VERTICAL);
 
         int layoutResId = mPrefAsCard ? R.layout.card_preference : R.layout.preference;
@@ -154,8 +165,28 @@ public class MaterialPreference extends LinearLayout {
         return (T) this;
     }
 
-    @Nullable public View getRootView() {
+    @NonNull public View getRootView() {
         return mView;
+    }
+
+    @Nullable public MaterialPreferenceChangeListener getOnPreferenceChangeListener() {
+        return mListener;
+    }
+
+    @NonNull public ImageView getIconView() {
+        return mIcon;
+    }
+
+    @NonNull public TextView getTitleView() {
+        return mTitle;
+    }
+
+    @NonNull public TextView getSummaryView() {
+        return mSummary;
+    }
+
+    @Nullable public LinearLayout getWidgetFrame() {
+        return mWidgetFrame;
     }
 
     @NonNull public String getKey() {
@@ -165,4 +196,62 @@ public class MaterialPreference extends LinearLayout {
         return mPrefKey;
     }
 
+    public <T extends MaterialPreference> T setKey(String key) {
+        mPrefKey = key;
+        return (T) this;
+    }
+
+    @Nullable public String getTitle() {
+        return mTitle.getText().toString();
+    }
+
+    public <T extends MaterialPreference> T setTitle(String title) {
+        mTitle.setText(title);
+        return (T) this;
+    }
+
+    @Nullable public String getSummary() {
+        return mSummary.getText().toString();
+    }
+
+    public <T extends MaterialPreference> T setSummary(String summary) {
+        mSummary.setText(summary);
+        return (T) this;
+    }
+
+    public boolean isCard() {
+        return mPrefAsCard;
+    }
+
+    public <T extends MaterialPreference> T setAsCard(boolean asCard) {
+        mPrefAsCard = asCard;
+        return (T) this;
+    }
+
+    public int getResIdIcon() {
+        return mResIdIcon;
+    }
+
+    public <T extends MaterialPreference> T setResIdIcon(int resIdIcon) {
+        mResIdIcon = resIdIcon;
+        return (T) this;
+    }
+
+    public int getmResIdTitle() {
+        return mResIdTitle;
+    }
+
+    public <T extends MaterialPreference> T setResIdTitle(int resIdTitle) {
+        mResIdTitle = resIdTitle;
+        return (T) this;
+    }
+
+    public int getResIdSummary() {
+        return mResIdSummary;
+    }
+
+    public <T extends MaterialPreference> T setResIdSummary(int resIdSummary) {
+        mResIdSummary = resIdSummary;
+        return (T) this;
+    }
 }

@@ -54,7 +54,7 @@ public class MaterialSwitchPreference extends MaterialPreference implements Comp
         init(context, attrs);
     }
 
-    protected void init(Context context, AttributeSet attrs) {
+    @Override  public void init(Context context, AttributeSet attrs) {
         super.init(context, attrs);
 
         if (mSwitch == null) {
@@ -67,7 +67,7 @@ public class MaterialSwitchPreference extends MaterialPreference implements Comp
         this.setOnClickListener(this);
     }
 
-    protected TypedArray parseAttrs(Context context, AttributeSet attrs) {
+    @Override protected TypedArray parseAttrs(Context context, AttributeSet attrs) {
         final TypedArray a = super.parseAttrs(context, attrs);
 
         if (a == null) {
