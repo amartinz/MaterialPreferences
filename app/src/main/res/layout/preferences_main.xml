@@ -22,14 +22,12 @@
     android:orientation="vertical">
 
     <alexander.martinz.libs.materialpreferences.MaterialPreference
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/MaterialPreferences.Default"
         app:prefSummary="@string/dummy_standalone_summary"
         app:prefTitle="@string/app_name" />
 
     <alexander.martinz.libs.materialpreferences.MaterialPreference
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/MaterialPreferences.Default"
         app:prefAsCard="true"
         app:prefIcon="@mipmap/ic_launcher"
         app:prefSummary="@string/dummy_standalone_card_summary"
@@ -37,14 +35,12 @@
 
     <!-- category with all preferences -->
     <alexander.martinz.libs.materialpreferences.MaterialPreferenceCategory
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/MaterialPreferences.Default"
         app:prefTitle="@string/category_dummy_title">
 
         <alexander.martinz.libs.materialpreferences.MaterialListPreference
             android:id="@+id/list_dummy_one"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/MaterialPreferences.Default"
             app:prefEntries="@array/list_dummy_one_entries"
             app:prefEntryValues="@array/list_dummy_one_values"
             app:prefKey="list_dummy_one"
@@ -53,8 +49,7 @@
 
         <alexander.martinz.libs.materialpreferences.MaterialEditTextPreference
             android:id="@+id/edittext_dummy_one"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/MaterialPreferences.Default"
             app:prefDefaultValue="1337"
             app:prefKey="edittext_dummy_one"
             app:prefSummary="@string/edittext_dummy_one_summary"
@@ -64,8 +59,7 @@
 
         <alexander.martinz.libs.materialpreferences.MaterialSwitchPreference
             android:id="@+id/switch_dummy_one"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/MaterialPreferences.Default"
             app:prefDefaultValue="true"
             app:prefKey="switch_dummy_one"
             app:prefSummary="@string/switch_dummy_one_summary"
@@ -73,8 +67,7 @@
 
         <alexander.martinz.libs.materialpreferences.MaterialSwitchPreference
             android:id="@+id/switch_dummy_two"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/MaterialPreferences.Default"
             app:prefKey="switch_dummy_two"
             app:prefSummary="@string/switch_dummy_two_summary"
             app:prefTitle="@string/switch_dummy_two_title" />
@@ -84,15 +77,13 @@
     <!-- category with dynamically added preferences -->
     <alexander.martinz.libs.materialpreferences.MaterialPreferenceCategory
         android:id="@+id/category_dynamic"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/MaterialPreferences.Default"
         app:prefTitle="@string/category_dynamic_title" />
 
     <!-- PREFERENCES STANDALONE AS CARD START -->
 
     <alexander.martinz.libs.materialpreferences.MaterialListPreference
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/MaterialPreferences.Default"
         app:prefAsCard="true"
         app:prefEntries="@array/list_dummy_one_entries"
         app:prefEntryValues="@array/list_dummy_one_values"
@@ -100,8 +91,7 @@
         app:prefTitle="@string/list_dummy_one_title" />
 
     <alexander.martinz.libs.materialpreferences.MaterialEditTextPreference
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/MaterialPreferences.Default"
         app:prefAsCard="true"
         app:prefDefaultValue="1337"
         app:prefSummary="@string/edittext_dummy_one_summary"
@@ -110,16 +100,14 @@
         app:prefTitle="@string/edittext_dummy_one_title" />
 
     <alexander.martinz.libs.materialpreferences.MaterialSwitchPreference
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/MaterialPreferences.Default"
         app:prefAsCard="true"
         app:prefDefaultValue="true"
         app:prefSummary="@string/switch_dummy_one_summary"
         app:prefTitle="@string/switch_dummy_one_title" />
 
     <alexander.martinz.libs.materialpreferences.MaterialSwitchPreference
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/MaterialPreferences.Default"
         app:prefAsCard="true"
         app:prefSummary="@string/switch_dummy_two_summary"
         app:prefTitle="@string/switch_dummy_two_title" />
@@ -128,32 +116,27 @@
 
     <!-- category just to fill some space -->
     <alexander.martinz.libs.materialpreferences.MaterialPreferenceCategory
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/MaterialPreferences.Default"
         app:prefIcon="@mipmap/ic_launcher"
         app:prefTitle="@string/category_dummy_icon_title">
 
         <alexander.martinz.libs.materialpreferences.MaterialPreference
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/MaterialPreferences.Default"
             app:prefSummary="@string/dummy_summary"
             app:prefTitle="@string/app_name" />
 
         <alexander.martinz.libs.materialpreferences.MaterialPreference
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/MaterialPreferences.Default"
             app:prefSummary="@string/dummy_summary"
             app:prefTitle="@string/app_name" />
 
         <alexander.martinz.libs.materialpreferences.MaterialPreference
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/MaterialPreferences.Default"
             app:prefSummary="@string/dummy_summary"
             app:prefTitle="@string/app_name" />
 
         <alexander.martinz.libs.materialpreferences.MaterialPreference
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/MaterialPreferences.Default"
             app:prefSummary="@string/dummy_summary"
             app:prefTitle="@string/app_name" />
 
