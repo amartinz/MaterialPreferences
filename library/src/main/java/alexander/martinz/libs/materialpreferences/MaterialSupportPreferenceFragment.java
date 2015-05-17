@@ -22,13 +22,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 public class MaterialSupportPreferenceFragment extends Fragment {
 
     protected int getLayoutResourceId() {
         return -1;
     }
+
+    public MaterialSupportPreferenceFragment() { }
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {

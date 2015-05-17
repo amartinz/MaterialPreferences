@@ -29,6 +29,8 @@ public class MaterialPreferenceFragment extends Fragment {
         return -1;
     }
 
+    public MaterialPreferenceFragment() { }
+
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_preference, container, false);
