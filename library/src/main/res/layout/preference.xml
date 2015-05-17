@@ -41,6 +41,7 @@
         android:paddingEnd="12dp"
         android:paddingRight="12dp"
         android:paddingTop="4dp"
+        android:visibility="gone"
         tools:src="@drawable/abc_btn_rating_star_on_mtrl_alpha" />
 
     <RelativeLayout

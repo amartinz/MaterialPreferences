@@ -111,10 +111,9 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
         mSummary = (TextView) mView.findViewById(android.R.id.summary);
         mWidgetFrame = (LinearLayout) mView.findViewById(android.R.id.widget_frame);
 
-        if (mResIdIcon != -1) {
+        if (mResIdIcon != -1 && mIcon != null) {
             mIcon.setImageResource(mResIdIcon);
-        } else {
-            mIcon.setVisibility(View.GONE);
+            mIcon.setVisibility(View.VISIBLE);
         }
         if (mResIdTitle != -1) {
             mTitle.setText(mResIdTitle);

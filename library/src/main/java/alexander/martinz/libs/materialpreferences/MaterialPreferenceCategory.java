@@ -30,6 +30,10 @@ import android.widget.TextView;
 public class MaterialPreferenceCategory extends MaterialPreference {
     private boolean mInit;
 
+    protected View mView;
+
+    protected ImageView mIcon;
+    protected TextView mTitle;
     protected LinearLayout mCardContainer;
 
     public MaterialPreferenceCategory(Context context) {
@@ -68,16 +72,17 @@ public class MaterialPreferenceCategory extends MaterialPreference {
         mTitle = (TextView) mView.findViewById(android.R.id.title);
         mCardContainer = (LinearLayout) mView.findViewById(R.id.card_preference_container);
 
-        if (mResIdIcon != -1) {
+        if (mResIdIcon != -1 && mIcon != null) {
             mIcon.setImageResource(mResIdIcon);
-        } else {
-            mIcon.setVisibility(View.GONE);
+            mIcon.setVisibility(View.VISIBLE);
         }
         if (mResIdTitle != -1) {
             mTitle.setText(mResIdTitle);
         } else {
             mTitle.setVisibility(View.GONE);
         }
+
+        setOnClickListener(this);
     }
 
     @NonNull public LinearLayout getPreferenceContainer() {
