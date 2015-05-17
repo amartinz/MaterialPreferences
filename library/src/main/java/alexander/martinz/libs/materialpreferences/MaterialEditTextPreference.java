@@ -114,6 +114,7 @@ public class MaterialEditTextPreference extends MaterialPreference implements Vi
     }
 
     @Override public void onClick(View v) {
+        super.onClick(v);
         final AlertDialog dialog = createAlertDialog();
         dialog.show();
     }

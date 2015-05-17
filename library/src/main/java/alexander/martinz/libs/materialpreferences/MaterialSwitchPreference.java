@@ -54,7 +54,7 @@ public class MaterialSwitchPreference extends MaterialPreference implements Comp
         init(context, attrs);
     }
 
-    @Override  public void init(Context context, AttributeSet attrs) {
+    @Override public void init(Context context, AttributeSet attrs) {
         super.init(context, attrs);
 
         if (mSwitch == null) {
@@ -91,6 +91,7 @@ public class MaterialSwitchPreference extends MaterialPreference implements Comp
     }
 
     @Override public void onClick(View v) {
+        super.onClick(v);
         mSwitch.toggle();
     }
 

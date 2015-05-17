@@ -166,6 +166,7 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
     }
 
     @Override public void onClick(View v) {
+        super.onClick(v);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
             mSpinner.performClick();
         } else {

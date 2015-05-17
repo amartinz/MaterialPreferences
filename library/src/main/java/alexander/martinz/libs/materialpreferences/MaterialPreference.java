@@ -31,11 +31,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MaterialPreference extends LinearLayout {
+public class MaterialPreference extends LinearLayout implements View.OnClickListener {
     private boolean mInit;
 
     protected View mView;
     protected MaterialPreferenceChangeListener mListener;
+    protected MaterialPreferenceClickListener mClickListener;
 
     protected ImageView mIcon;
     protected TextView mTitle;
@@ -52,6 +53,10 @@ public class MaterialPreference extends LinearLayout {
 
     public interface MaterialPreferenceChangeListener {
         boolean onPreferenceChanged(MaterialPreference preference, Object newValue);
+    }
+
+    public interface MaterialPreferenceClickListener {
+        boolean onPreferenceClicked(MaterialPreference preference);
     }
 
     /**
@@ -121,6 +126,8 @@ public class MaterialPreference extends LinearLayout {
         } else {
             mSummary.setVisibility(View.GONE);
         }
+
+        setOnClickListener(this);
     }
 
     protected TypedArray parseAttrs(Context context, AttributeSet attrs) {
@@ -146,6 +153,12 @@ public class MaterialPreference extends LinearLayout {
         }
     }
 
+    @Override public void onClick(View v) {
+        if (mClickListener != null) {
+            mClickListener.onPreferenceClicked(this);
+        }
+    }
+
     public LayoutInflater getLayoutInflater() {
         return LayoutInflater.from(getContext());
     }
@@ -162,6 +175,12 @@ public class MaterialPreference extends LinearLayout {
     public <T extends MaterialPreference> T setOnPreferenceChangeListener(
             MaterialPreferenceChangeListener listener) {
         mListener = listener;
+        return (T) this;
+    }
+
+    public <T extends MaterialPreference> T setOnPreferenceClickListener(
+            MaterialPreferenceClickListener listener) {
+        mClickListener = listener;
         return (T) this;
     }
 
