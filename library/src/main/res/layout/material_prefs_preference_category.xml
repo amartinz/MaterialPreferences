@@ -51,4 +51,13 @@
         android:textColor="?attr/colorAccent"
         tools:text="Category title" />
 
+    <!-- Preference should place its actual material_prefs_preference widget here. -->
+    <LinearLayout android:id="@android:id/widget_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="right|center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingStart="16dp" />
+
 </LinearLayout>

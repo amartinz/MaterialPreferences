@@ -16,6 +16,15 @@ public class MaterialPreferenceFactory {
         return preference;
     }
 
+    public static MaterialPreferenceCategory createPreferenceCategory(Context context,
+            String key, String title) {
+        final MaterialPreferenceCategory preference = new MaterialPreferenceCategory(context);
+        preference.init(context);
+        preference.setKey(key);
+        preference.setTitle(title);
+        return preference;
+    }
+
     public static MaterialEditTextPreference createEditTextPreference(Context context,
             boolean isCard, String key, String title, String summary, String unknown,
             String value) {
