@@ -30,32 +30,24 @@ import android.widget.TextView;
 public class MaterialPreferenceCategory extends MaterialPreference {
     private boolean mInit;
 
-    protected View mView;
-
-    protected ImageView mIcon;
-    protected TextView mTitle;
     protected LinearLayout mCardContainer;
 
     public MaterialPreferenceCategory(Context context) {
         super(context);
-        init(context, null);
     }
 
     public MaterialPreferenceCategory(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context, attrs);
     }
 
     public MaterialPreferenceCategory(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context, attrs);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public MaterialPreferenceCategory(Context context, AttributeSet attrs, int defStyleAttr,
             int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init(context, attrs);
     }
 
     @Override public void init(Context context, AttributeSet attrs) {
