@@ -130,7 +130,8 @@ public class MainPreferenceFragment extends MaterialSupportPreferenceFragment im
                 "GeneratedCategory1", "Generated category 1");
         addPreference(generatedCategoryOne);
         generatedCategoryOne.addPreference(createPreference(false, "cat1", "Mep", "mepmep"));
-        generatedCategoryOne.addPreference(createPreference(false, "cat1", "Derp", "derpderpderp"));
+        generatedCategoryOne.addPreference(createPreference(false, "cat2", "Derp", "derpderpderp"));
+        generatedCategoryOne.addPreference(createSwitchPreference(false, "s1", "Herp", null, true));
     }
 
     private MaterialPreference addPreferenceToCategory(final MaterialPreferenceCategory category,

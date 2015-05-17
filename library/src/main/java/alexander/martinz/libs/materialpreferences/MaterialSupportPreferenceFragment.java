@@ -64,7 +64,7 @@ public class MaterialSupportPreferenceFragment extends Fragment {
     public MaterialPreference createPreference(boolean isCard, String key, String title,
             String summary) {
         return MaterialPreferenceFactory.createPreference(getActivity(), isCard, key, title,
-                summary, getUnknown());
+                summary);
     }
 
     public MaterialPreferenceCategory createPreferenceCategory(String key, String title) {
@@ -74,19 +74,19 @@ public class MaterialSupportPreferenceFragment extends Fragment {
     public MaterialSwitchPreference createSwitchPreference(boolean isCard, String key, String title,
             String summary, boolean isChecked) {
         return MaterialPreferenceFactory.createSwitchPreference(getActivity(), isCard, key, title,
-                summary, getUnknown(), isChecked);
+                summary, isChecked);
     }
 
     public MaterialEditTextPreference createEditTextPreference(boolean isCard, String key,
             String title, String summary, String value) {
         return MaterialPreferenceFactory.createEditTextPreference(getActivity(), isCard, key, title,
-                summary, getUnknown(), value);
+                summary, value);
     }
 
     public MaterialListPreference createListPreference(boolean isCard, String key,
             String title, String summary) {
         return MaterialPreferenceFactory.createListPreference(getActivity(), isCard, key, title,
-                summary, getUnknown());
+                summary);
     }
 
 }

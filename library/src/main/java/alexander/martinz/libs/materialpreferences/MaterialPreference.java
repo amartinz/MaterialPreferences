@@ -118,7 +118,8 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
             recycleTypedArray(typedArray);
         }
 
-        int layoutResId = mPrefAsCard ? R.layout.material_prefs_card_preference : R.layout.material_prefs_preference;
+        int layoutResId =
+                mPrefAsCard ? R.layout.material_prefs_card_preference : R.layout.material_prefs_preference;
 
         mView = getLayoutInflater().inflate(layoutResId, this, false);
         super.addView(mView);
@@ -135,8 +136,9 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
         if (mResIdTitle != -1) {
             mTitle.setText(mResIdTitle);
         }
-        if (mResIdSummary != -1) {
+        if (mResIdSummary != -1 && mSummary != null) {
             mSummary.setText(mResIdSummary);
+            mSummary.setVisibility(View.VISIBLE);
         }
 
         setSelectable(true);
@@ -225,7 +227,7 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
         return (T) this;
     }
 
-    @NonNull public ImageView getIconView() {
+    @Nullable public ImageView getIconView() {
         return mIcon;
     }
 
@@ -233,7 +235,7 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
         return mTitle;
     }
 
-    @NonNull public TextView getSummaryView() {
+    @Nullable public TextView getSummaryView() {
         return mSummary;
     }
 
@@ -254,7 +256,10 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
     }
 
     @Nullable public String getTitle() {
-        return mTitle.getText().toString();
+        if (mTitle == null) {
+            return null;
+        }
+        return String.valueOf(mTitle.getText());
     }
 
     public <T extends MaterialPreference> T setTitle(String title) {
@@ -263,11 +268,21 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
     }
 
     @Nullable public String getSummary() {
-        return mSummary.getText().toString();
+        if (mSummary == null) {
+            return null;
+        }
+        return String.valueOf(mSummary.getText());
     }
 
-    public <T extends MaterialPreference> T setSummary(String summary) {
-        mSummary.setText(summary);
+    public <T extends MaterialPreference> T setSummary(@Nullable String summary) {
+        if (mSummary != null) {
+            if (TextUtils.isEmpty(summary)) {
+                mSummary.setVisibility(View.GONE);
+            } else {
+                mSummary.setText(summary);
+                mSummary.setVisibility(View.VISIBLE);
+            }
+        }
         return (T) this;
     }
 
