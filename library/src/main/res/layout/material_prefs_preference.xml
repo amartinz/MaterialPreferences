@@ -56,7 +56,8 @@
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
             android:singleLine="true"
-            android:textAppearance="@style/MaterialPreferences.PreferenceTitle" />
+            android:textAppearance="@style/MaterialPreferences.PreferenceTitle"
+            android:textColor="?android:textColorPrimary" />
 
         <TextView android:id="@android:id/summary"
             android:layout_width="wrap_content"
@@ -66,7 +67,7 @@
             android:layout_below="@android:id/title"
             android:maxLines="10"
             android:textAppearance="@style/MaterialPreferences.PreferenceSummary"
-            android:textColor="@color/txtColSecondary"
+            android:textColor="?android:textColorSecondary"
             android:visibility="gone" />
 
     </RelativeLayout>
