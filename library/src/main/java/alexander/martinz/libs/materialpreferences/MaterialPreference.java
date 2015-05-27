@@ -103,13 +103,13 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
         init(context, attrs);
     }
 
-    public void init(Context context) {
-        init(context, null);
+    public boolean init(Context context) {
+        return init(context, null);
     }
 
-    public void init(Context context, AttributeSet attrs) {
+    public boolean init(Context context, AttributeSet attrs) {
         if (mInit) {
-            return;
+            return false;
         }
         mInit = true;
 
@@ -146,6 +146,8 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
         setOnTouchListener(this);
 
         setOrientation(LinearLayout.VERTICAL);
+
+        return true;
     }
 
     protected TypedArray parseAttrs(Context context, AttributeSet attrs) {

@@ -50,8 +50,10 @@ public class MaterialSwitchPreference extends MaterialPreference implements Comp
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    @Override public void init(Context context, AttributeSet attrs) {
-        super.init(context, attrs);
+    @Override public boolean init(Context context, AttributeSet attrs) {
+        if (!super.init(context, attrs)) {
+            return false;
+        }
 
         if (mSwitch == null) {
             mSwitch = new SwitchCompat(context);
@@ -60,7 +62,9 @@ public class MaterialSwitchPreference extends MaterialPreference implements Comp
             mSwitch.setOnCheckedChangeListener(this);
         }
 
-        this.setOnClickListener(this);
+        setOnClickListener(this);
+
+        return true;
     }
 
     @Override protected TypedArray parseAttrs(Context context, AttributeSet attrs) {
