@@ -50,9 +50,9 @@ public class MaterialPreferenceCategory extends MaterialPreference {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    @Override public void init(Context context, AttributeSet attrs) {
+    @Override public boolean init(Context context, AttributeSet attrs) {
         if (mInit) {
-            return;
+            return false;
         }
         mInit = true;
 
@@ -79,6 +79,8 @@ public class MaterialPreferenceCategory extends MaterialPreference {
 
         setSelectable(false);
         setOrientation(LinearLayout.VERTICAL);
+
+        return true;
     }
 
     @NonNull public LinearLayout getPreferenceContainer() {
