@@ -29,10 +29,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class MaterialListPreference extends MaterialPreference implements AdapterView.OnItemSelectedListener, View.OnClickListener {
-    private Spinner mSpinner;
     private ArrayAdapter<CharSequence> mSpinnerAdapter;
+    private Spinner mSpinner;
+
+    private TextView mSpinnerTextView;
+    private int mSpinnerTextViewColor = -1;
 
     private String mDefaultValue;
     private int mDefaultIndex;
@@ -44,6 +48,14 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
     private CharSequence[] mEntryValues;
 
     private String mValue;
+
+    protected int getSpinnerItemResId() {
+        return android.R.layout.simple_spinner_item;
+    }
+
+    protected int getSpinnerDropdownItemResId() {
+        return android.R.layout.simple_spinner_dropdown_item;
+    }
 
     public MaterialListPreference(Context context) {
         super(context);
@@ -65,15 +77,16 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    @Override public void init(Context context, AttributeSet attrs) {
-        super.init(context, attrs);
+    @Override public boolean init(Context context, AttributeSet attrs) {
+        if (!super.init(context, attrs)) {
+            return false;
+        }
 
         if (mSpinnerAdapter == null) {
             if (mEntriesResId != -1) {
                 mSpinnerAdapter = ArrayAdapter.createFromResource(context,
-                        mEntriesResId, android.R.layout.simple_spinner_item);
-                mSpinnerAdapter.setDropDownViewResource(
-                        android.R.layout.simple_spinner_dropdown_item);
+                        mEntriesResId, getSpinnerItemResId());
+                mSpinnerAdapter.setDropDownViewResource(getSpinnerDropdownItemResId());
             } else if (mEntries != null) {
                 mSpinnerAdapter = createAdapter(mEntries, mEntryValues);
             }
@@ -92,12 +105,15 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
             // after the spinner is fully initialized
             mSpinner.post(new Runnable() {
                 @Override public void run() {
+                    mSpinnerTextView = null;
                     mSpinner.setOnItemSelectedListener(MaterialListPreference.this);
                 }
             });
         }
 
-        this.setOnClickListener(this);
+        setOnClickListener(this);
+
+        return true;
     }
 
     @Override protected TypedArray parseAttrs(Context context, AttributeSet attrs) {
@@ -137,6 +153,12 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
     public void setAdapter(ArrayAdapter<CharSequence> adapter) {
         mSpinnerAdapter = adapter;
         mSpinner.setAdapter(mSpinnerAdapter);
+        mSpinner.post(new Runnable() {
+            @Override public void run() {
+                mSpinnerTextView = null;
+                mSpinner.setOnItemSelectedListener(MaterialListPreference.this);
+            }
+        });
     }
 
     @NonNull public Spinner getSpinner() {
@@ -145,6 +167,18 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
 
     @Nullable public ArrayAdapter<CharSequence> getSpinnerAdapter() {
         return mSpinnerAdapter;
+    }
+
+    @Nullable public TextView getSpinnerTextView() {
+        return mSpinnerTextView;
+    }
+
+    public <T extends MaterialPreference> T setSpinnerTextViewColor(int color) {
+        mSpinnerTextViewColor = color;
+        if (mSpinnerTextView != null && color != -1) {
+            mSpinnerTextView.setTextColor(mSpinnerTextViewColor);
+        }
+        return (T) this;
     }
 
     @Nullable public String getValue() {
@@ -197,13 +231,22 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
         mEntries = entries;
         mEntryValues = values;
 
-        final ArrayAdapter<CharSequence> arrayAdapter =
-                new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, entries);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        final ArrayAdapter<CharSequence> arrayAdapter = new ArrayAdapter<>(getContext(),
+                getSpinnerItemResId(), entries);
+        arrayAdapter.setDropDownViewResource(getSpinnerDropdownItemResId());
         return arrayAdapter;
     }
 
     @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // we need to initialize the spinner text view here
+        if (mSpinnerTextView == null) {
+            View maybeOurView = parent.getChildAt(0);
+            if (maybeOurView != null && maybeOurView.getId() == android.R.id.text1) {
+                mSpinnerTextView = (TextView) maybeOurView;
+                setSpinnerTextViewColor(mSpinnerTextViewColor);
+            }
+        }
+
         // we have set a value, do not fire the listener
         if (mSpinner.getTag() == position) {
             return;
@@ -220,6 +263,8 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
                 mValue = value;
             }
         }
+
+        mSpinner.setTag(position);
     }
 
     @Override public void onNothingSelected(AdapterView<?> parent) {
@@ -228,10 +273,6 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
 
     @Override public void onClick(View v) {
         super.onClick(v);
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-            mSpinner.performClick();
-        } else {
-            mSpinner.callOnClick();
-        }
+        mSpinner.performClick();
     }
 }

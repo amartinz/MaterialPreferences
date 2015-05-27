@@ -66,8 +66,10 @@ public class MaterialEditTextPreference extends MaterialPreference implements Vi
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    @Override public void init(Context context, AttributeSet attrs) {
-        super.init(context, attrs);
+    @Override public boolean init(Context context, AttributeSet attrs) {
+        if (!super.init(context, attrs)) {
+            return false;
+        }
 
         if (mEditTextValue == null) {
             mEditTextValue = new EditText(context);
@@ -88,7 +90,9 @@ public class MaterialEditTextPreference extends MaterialPreference implements Vi
             addToWidgetFrame(mEditTextValue);
         }
 
-        this.setOnClickListener(this);
+        setOnClickListener(this);
+
+        return true;
     }
 
     @Override protected TypedArray parseAttrs(Context context, AttributeSet attrs) {
