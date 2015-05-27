@@ -103,6 +103,10 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
         init(context, attrs);
     }
 
+    public LayoutInflater getCustomLayoutInflater() {
+        return null;
+    }
+
     public boolean init(Context context) {
         return init(context, null);
     }
@@ -118,9 +122,8 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
             recycleTypedArray(typedArray);
         }
 
-        int layoutResId =
-                mPrefAsCard ? R.layout.material_prefs_card_preference : R.layout.material_prefs_preference;
-
+        final int layoutResId = mPrefAsCard
+                ? R.layout.material_prefs_card_preference : R.layout.material_prefs_preference;
         mView = getLayoutInflater().inflate(layoutResId, this, false);
         super.addView(mView);
 
@@ -187,7 +190,11 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
     }
 
     public LayoutInflater getLayoutInflater() {
-        return LayoutInflater.from(getContext());
+        LayoutInflater inflater = getCustomLayoutInflater();
+        if (inflater == null) {
+            inflater = LayoutInflater.from(getContext());
+        }
+        return inflater;
     }
 
     public void addToWidgetFrame(int layoutResId) {
@@ -211,7 +218,7 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
         return (T) this;
     }
 
-    @NonNull public View getRootView() {
+    @NonNull public View getCardView() {
         return mView;
     }
 
