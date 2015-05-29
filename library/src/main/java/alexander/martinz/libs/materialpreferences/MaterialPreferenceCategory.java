@@ -20,6 +20,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import android.widget.TextView;
 public class MaterialPreferenceCategory extends MaterialPreference {
     private boolean mInit;
 
+    protected CardView mCardView;
     protected LinearLayout mCardContainer;
 
     public MaterialPreferenceCategory(Context context) {
@@ -64,6 +66,8 @@ public class MaterialPreferenceCategory extends MaterialPreference {
                 .inflate(R.layout.material_prefs_card_preference_category, this, false);
         super.addView(mView);
 
+        mCardView = (CardView) mView.findViewById(R.id.card_preference_root);
+
         mIcon = (ImageView) mView.findViewById(android.R.id.icon);
         mTitle = (TextView) mView.findViewById(android.R.id.title);
         mCardContainer = (LinearLayout) mView.findViewById(R.id.card_preference_container);
@@ -81,6 +85,10 @@ public class MaterialPreferenceCategory extends MaterialPreference {
         setOrientation(LinearLayout.VERTICAL);
 
         return true;
+    }
+
+    @NonNull @Override public CardView getCardView() {
+        return mCardView;
     }
 
     @NonNull public LinearLayout getPreferenceContainer() {
