@@ -22,6 +22,7 @@ import android.content.res.TypedArray;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -218,8 +219,12 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
         return (T) this;
     }
 
-    @NonNull public View getCardView() {
-        return mView;
+    @Override public void setBackgroundColor(int color) {
+        if (mView instanceof CardView) {
+            ((CardView) mView).setCardBackgroundColor(color);
+        } else {
+            super.setBackgroundColor(color);
+        }
     }
 
     @Nullable public MaterialPreferenceChangeListener getOnPreferenceChangeListener() {

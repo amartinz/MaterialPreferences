@@ -87,7 +87,7 @@ public class MaterialPreferenceCategory extends MaterialPreference {
         return true;
     }
 
-    @NonNull @Override public CardView getCardView() {
+    @NonNull public CardView getCardView() {
         return mCardView;
     }
 
@@ -103,6 +103,10 @@ public class MaterialPreferenceCategory extends MaterialPreference {
     public MaterialPreferenceCategory addPreference(MaterialPreference preference, int index) {
         addView(preference, index);
         return this;
+    }
+
+    @Override public void setBackgroundColor(int color) {
+        mCardView.setBackgroundColor(color);
     }
 
     @Override public void addView(@NonNull View child) {
