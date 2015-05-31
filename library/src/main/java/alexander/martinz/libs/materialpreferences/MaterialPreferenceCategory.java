@@ -106,7 +106,7 @@ public class MaterialPreferenceCategory extends MaterialPreference {
     }
 
     @Override public void setBackgroundColor(int color) {
-        mCardView.setBackgroundColor(color);
+        mCardView.setCardBackgroundColor(color);
     }
 
     @Override public void addView(@NonNull View child) {
