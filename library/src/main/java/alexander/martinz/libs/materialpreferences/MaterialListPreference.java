@@ -239,12 +239,10 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
 
     @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // we need to initialize the spinner text view here
-        if (mSpinnerTextView == null) {
-            View maybeOurView = parent.getChildAt(0);
-            if (maybeOurView != null && maybeOurView.getId() == android.R.id.text1) {
-                mSpinnerTextView = (TextView) maybeOurView;
-                mSpinnerTextView.setTextColor(mSpinnerTextViewColor);
-            }
+        View maybeOurView = parent.getChildAt(0);
+        if (maybeOurView != null && maybeOurView.getId() == android.R.id.text1) {
+            mSpinnerTextView = (TextView) maybeOurView;
+            mSpinnerTextView.setTextColor(mSpinnerTextViewColor);
         }
 
         // we have set a value, do not fire the listener
