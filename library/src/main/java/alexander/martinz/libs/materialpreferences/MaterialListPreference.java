@@ -187,7 +187,19 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
 
     public <T extends MaterialPreference> T setValue(String value) {
         mValue = value;
-        int position = mSpinnerAdapter.getPosition(mValue);
+        int position = -1;
+        if (mEntryValues != null) {
+            for (int i = 0; i < mEntryValues.length; i++) {
+                String tmp = String.valueOf(mEntryValues[i]);
+                if (value.equals(tmp)) {
+                    position = i;
+                    break;
+                }
+            }
+        }
+        if (position == -1) {
+            position = mSpinnerAdapter.getPosition(mValue);
+        }
         if (position != -1) {
             // set a tag to prevent the onitemselected listener from triggering
             mSpinner.setTag(position);
