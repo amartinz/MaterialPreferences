@@ -24,7 +24,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:foreground="?android:attr/selectableItemBackground"
-    android:minHeight="72dp"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="4dp"
     card_view:contentPadding="5dp">
