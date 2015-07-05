@@ -44,6 +44,7 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
     protected TextView mTitle;
     protected TextView mSummary;
     protected LinearLayout mWidgetFrame;
+    protected LinearLayout mWidgetFrameBottom;
 
     protected String mPrefKey;
 
@@ -132,6 +133,7 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
         mTitle = (TextView) mView.findViewById(android.R.id.title);
         mSummary = (TextView) mView.findViewById(android.R.id.summary);
         mWidgetFrame = (LinearLayout) mView.findViewById(android.R.id.widget_frame);
+        mWidgetFrameBottom = (LinearLayout) mView.findViewById(R.id.widget_frame_bottom);
 
         if (mResIdIcon != -1 && mIcon != null) {
             mIcon.setImageResource(mResIdIcon);
@@ -205,6 +207,15 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
 
     public void addToWidgetFrame(View view) {
         mWidgetFrame.addView(view);
+    }
+
+    public void addToWidgetFrameBottom(int layoutResId) {
+        View view = getLayoutInflater().inflate(layoutResId, mWidgetFrameBottom, false);
+        addToWidgetFrameBottom(view);
+    }
+
+    public void addToWidgetFrameBottom(View view) {
+        mWidgetFrameBottom.addView(view);
     }
 
     public <T extends MaterialPreference> T setOnPreferenceChangeListener(

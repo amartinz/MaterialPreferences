@@ -47,10 +47,12 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
     private CharSequence[] mEntries;
     private CharSequence[] mEntryValues;
 
+    private boolean mPlaceOnBottom;
+
     private String mValue;
 
     protected int getSpinnerItemResId() {
-        return android.R.layout.simple_spinner_item;
+        return R.layout.material_item_spinner_content;
     }
 
     protected int getSpinnerDropdownItemResId() {
@@ -92,14 +94,19 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
             }
         }
         if (mSpinner == null) {
-            mSpinner = new Spinner(context);
+            mSpinner = (Spinner) getLayoutInflater()
+                    .inflate(R.layout.material_item_spinner, this, false);
             mSpinner.setAdapter(mSpinnerAdapter);
             if (!TextUtils.isEmpty(mDefaultValue)) {
                 mSpinner.setSelection(mSpinnerAdapter.getPosition(mDefaultValue));
             } else if (mDefaultIndex != -1) {
                 mSpinner.setSelection(mDefaultIndex);
             }
-            addToWidgetFrame(mSpinner);
+            if (mPlaceOnBottom) {
+                addToWidgetFrameBottom(mSpinner);
+            } else {
+                addToWidgetFrame(mSpinner);
+            }
 
             // spinners are ... weird, to prevent the listener from getting called we have to set it
             // after the spinner is fully initialized
@@ -147,18 +154,14 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
             }
         }
 
+        mPlaceOnBottom = a.getBoolean(R.styleable.MaterialPreference_prefPlaceOnBottom, false);
+
         return a;
     }
 
     public void setAdapter(ArrayAdapter<CharSequence> adapter) {
         mSpinnerAdapter = adapter;
         mSpinner.setAdapter(mSpinnerAdapter);
-        mSpinner.post(new Runnable() {
-            @Override public void run() {
-                mSpinnerTextView = null;
-                mSpinner.setOnItemSelectedListener(MaterialListPreference.this);
-            }
-        });
     }
 
     @NonNull public Spinner getSpinner() {
@@ -250,13 +253,6 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
     }
 
     @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // we need to initialize the spinner text view here
-        View maybeOurView = parent.getChildAt(0);
-        if (maybeOurView != null && maybeOurView.getId() == android.R.id.text1) {
-            mSpinnerTextView = (TextView) maybeOurView;
-            mSpinnerTextView.setTextColor(mSpinnerTextViewColor);
-        }
-
         // we have set a value, do not fire the listener
         if (mSpinner.getTag() == position) {
             return;
