@@ -53,6 +53,7 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
     protected int mResIdIcon;
     protected int mResIdTitle;
     protected int mResIdSummary;
+    protected int mCardBackgroundColor;
 
     protected boolean mSelectable;
 
@@ -147,6 +148,10 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
             mSummary.setVisibility(View.VISIBLE);
         }
 
+        if (mPrefAsCard && mCardBackgroundColor != Integer.MIN_VALUE) {
+            setBackgroundColor(mCardBackgroundColor);
+        }
+
         setSelectable(true);
         setOnClickListener(this);
         setOnTouchListener(this);
@@ -169,6 +174,8 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
         mResIdIcon = a.getResourceId(R.styleable.MaterialPreference_prefIcon, -1);
         mResIdTitle = a.getResourceId(R.styleable.MaterialPreference_prefTitle, -1);
         mResIdSummary = a.getResourceId(R.styleable.MaterialPreference_prefSummary, -1);
+
+        mCardBackgroundColor = a.getColor(R.styleable.MaterialPreference_prefCardBackgroundColor, Integer.MIN_VALUE);
 
         return a;
     }

@@ -81,6 +81,10 @@ public class MaterialPreferenceCategory extends MaterialPreference {
             mTitle.setText(mResIdTitle);
         }
 
+        if (mCardBackgroundColor != Integer.MIN_VALUE) {
+            setBackgroundColor(mCardBackgroundColor);
+        }
+
         setSelectable(false);
         setOrientation(LinearLayout.VERTICAL);
 
