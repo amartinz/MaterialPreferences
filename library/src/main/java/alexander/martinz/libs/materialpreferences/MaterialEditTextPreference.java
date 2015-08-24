@@ -36,6 +36,8 @@ import android.widget.LinearLayout;
 import alexander.martinz.libs.materialpreferences.utils.Helper;
 
 public class MaterialEditTextPreference extends MaterialPreference implements View.OnClickListener {
+    private boolean mInit;
+
     private EditText mEditTextValue;
 
     private String mDefaultValue;
@@ -61,12 +63,16 @@ public class MaterialEditTextPreference extends MaterialPreference implements Vi
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public MaterialEditTextPreference(Context context, AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
+    public MaterialEditTextPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
     @Override public boolean init(Context context, AttributeSet attrs) {
+        if (mInit) {
+            return false;
+        }
+        mInit = true;
+
         if (!super.init(context, attrs)) {
             return false;
         }

@@ -32,6 +32,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class MaterialListPreference extends MaterialPreference implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+    private boolean mInit;
+
     private ArrayAdapter<CharSequence> mSpinnerAdapter;
     private Spinner mSpinner;
 
@@ -74,12 +76,16 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public MaterialListPreference(Context context, AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
+    public MaterialListPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
     @Override public boolean init(Context context, AttributeSet attrs) {
+        if (mInit) {
+            return false;
+        }
+        mInit = true;
+
         if (!super.init(context, attrs)) {
             return false;
         }
@@ -94,8 +100,7 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
             }
         }
         if (mSpinner == null) {
-            mSpinner = (Spinner) getLayoutInflater()
-                    .inflate(R.layout.material_item_spinner, this, false);
+            mSpinner = (Spinner) getLayoutInflater().inflate(R.layout.material_item_spinner, this, false);
             mSpinner.setAdapter(mSpinnerAdapter);
             if (!TextUtils.isEmpty(mDefaultValue)) {
                 mSpinner.setSelection(mSpinnerAdapter.getPosition(mDefaultValue));
@@ -246,8 +251,7 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
         mEntries = entries;
         mEntryValues = values;
 
-        final ArrayAdapter<CharSequence> arrayAdapter = new ArrayAdapter<>(getContext(),
-                getSpinnerItemResId(), entries);
+        final ArrayAdapter<CharSequence> arrayAdapter = new ArrayAdapter<>(getContext(), getSpinnerItemResId(), entries);
         arrayAdapter.setDropDownViewResource(getSpinnerDropdownItemResId());
         return arrayAdapter;
     }

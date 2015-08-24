@@ -100,8 +100,7 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public MaterialPreference(Context context, AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
+    public MaterialPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }
@@ -125,10 +124,8 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
             recycleTypedArray(typedArray);
         }
 
-        final int layoutResId = mPrefAsCard
-                ? R.layout.material_prefs_card_preference : R.layout.material_prefs_preference;
-        mView = getLayoutInflater().inflate(layoutResId, this, false);
-        super.addView(mView);
+        final int layoutResId = mPrefAsCard ? R.layout.material_prefs_card_preference : R.layout.material_prefs_preference;
+        mView = getLayoutInflater().inflate(layoutResId, this, true);
 
         mIcon = (ImageView) mView.findViewById(android.R.id.icon);
         mTitle = (TextView) mView.findViewById(android.R.id.title);
@@ -155,7 +152,6 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
         setSelectable(true);
         setOnClickListener(this);
         setOnTouchListener(this);
-
         setOrientation(LinearLayout.VERTICAL);
 
         return true;

@@ -47,8 +47,7 @@ public class MaterialPreferenceCategory extends MaterialPreference {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public MaterialPreferenceCategory(Context context, AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
+    public MaterialPreferenceCategory(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -62,10 +61,7 @@ public class MaterialPreferenceCategory extends MaterialPreference {
             super.parseAttrs(context, attrs);
         }
 
-        mView = getLayoutInflater()
-                .inflate(R.layout.material_prefs_card_preference_category, this, false);
-        super.addView(mView);
-
+        mView = getLayoutInflater().inflate(R.layout.material_prefs_card_preference_category, this, true);
         mCardView = (CardView) mView.findViewById(R.id.card_preference_root);
 
         mIcon = (ImageView) mView.findViewById(android.R.id.icon);

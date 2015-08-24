@@ -37,12 +37,9 @@ public class MaterialSupportPreferenceFragment extends Fragment {
 
     public MaterialSupportPreferenceFragment() { }
 
-    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        View rootView =
-                inflater.inflate(R.layout.material_prefs_fragment_preference, container, false);
-        mFragmentPreferenceContainer =
-                (LinearLayout) rootView.findViewById(R.id.fragment_preference_container);
+    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.material_prefs_fragment_preference, container, false);
+        mFragmentPreferenceContainer = (LinearLayout) rootView.findViewById(R.id.fragment_preference_container);
 
         int layoutResId = getLayoutResourceId();
         if (layoutResId != -1) {
@@ -61,32 +58,26 @@ public class MaterialSupportPreferenceFragment extends Fragment {
         mFragmentPreferenceContainer.addView(preference);
     }
 
-    public MaterialPreference createPreference(boolean isCard, String key, String title,
-            String summary) {
-        return MaterialPreferenceFactory.createPreference(getActivity(), isCard, key, title,
-                summary);
+    public MaterialPreference createPreference(boolean isCard, String key, String title, String summary) {
+        return MaterialPreferenceFactory.createPreference(getActivity(), isCard, key, title, summary);
     }
 
     public MaterialPreferenceCategory createPreferenceCategory(String key, String title) {
         return MaterialPreferenceFactory.createPreferenceCategory(getActivity(), key, title);
     }
 
-    public MaterialSwitchPreference createSwitchPreference(boolean isCard, String key, String title,
-            String summary, boolean isChecked) {
-        return MaterialPreferenceFactory.createSwitchPreference(getActivity(), isCard, key, title,
-                summary, isChecked);
+    public MaterialSwitchPreference createSwitchPreference(boolean isCard, String key, String title, String summary,
+            boolean isChecked) {
+        return MaterialPreferenceFactory.createSwitchPreference(getActivity(), isCard, key, title, summary, isChecked);
     }
 
-    public MaterialEditTextPreference createEditTextPreference(boolean isCard, String key,
-            String title, String summary, String value) {
-        return MaterialPreferenceFactory.createEditTextPreference(getActivity(), isCard, key, title,
-                summary, value);
+    public MaterialEditTextPreference createEditTextPreference(boolean isCard, String key, String title, String summary,
+            String value) {
+        return MaterialPreferenceFactory.createEditTextPreference(getActivity(), isCard, key, title, summary, value);
     }
 
-    public MaterialListPreference createListPreference(boolean isCard, String key,
-            String title, String summary) {
-        return MaterialPreferenceFactory.createListPreference(getActivity(), isCard, key, title,
-                summary);
+    public MaterialListPreference createListPreference(boolean isCard, String key, String title, String summary) {
+        return MaterialPreferenceFactory.createListPreference(getActivity(), isCard, key, title, summary);
     }
 
 }

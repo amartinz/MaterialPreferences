@@ -28,6 +28,8 @@ import android.view.View;
 import android.widget.CompoundButton;
 
 public class MaterialSwitchPreference extends MaterialPreference implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
+    private boolean mInit;
+
     private SwitchCompat mSwitch;
 
     private boolean mDefaultValue;
@@ -45,12 +47,16 @@ public class MaterialSwitchPreference extends MaterialPreference implements Comp
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public MaterialSwitchPreference(Context context, AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
+    public MaterialSwitchPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
     @Override public boolean init(Context context, AttributeSet attrs) {
+        if (mInit) {
+            return false;
+        }
+        mInit = true;
+
         if (!super.init(context, attrs)) {
             return false;
         }
