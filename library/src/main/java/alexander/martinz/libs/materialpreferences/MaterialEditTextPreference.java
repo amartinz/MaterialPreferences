@@ -23,6 +23,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -84,7 +85,7 @@ public class MaterialEditTextPreference extends MaterialPreference implements Vi
                 if (isInEditMode()) {
                     mEditTextValue.setTextColor(Color.parseColor("#009688"));
                 } else {
-                    mEditTextValue.setTextColor(context.getResources().getColor(mPrefTextColor));
+                    mEditTextValue.setTextColor(ContextCompat.getColor(context, mPrefTextColor));
                 }
             }
             if (mPrefTextSize != -1) {
