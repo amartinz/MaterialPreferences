@@ -28,13 +28,12 @@ import android.support.v7.app.AlertDialog;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-
-import alexander.martinz.libs.materialpreferences.utils.Helper;
 
 public class MaterialEditTextPreference extends MaterialPreference implements View.OnClickListener {
     private boolean mInit;
@@ -139,10 +138,10 @@ public class MaterialEditTextPreference extends MaterialPreference implements Vi
         wrapper.setOrientation(LinearLayout.VERTICAL);
         final LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        final int margin = (int) Helper.convertDpToPixels(10);
+        final int margin = (int) convertDpToPixels(10);
         layoutParams.setMargins(margin, 0, margin, 0);
 
-        // create the edittext and add it to the wrapper layout
+        // create the EditText and add it to the wrapper layout
         final EditText editText = new EditText(context);
         editText.setText(mValue);
         wrapper.addView(editText, layoutParams);
@@ -195,6 +194,11 @@ public class MaterialEditTextPreference extends MaterialPreference implements Vi
         mEditTextValue.setTextColor(color);
 
         return (T) this;
+    }
+
+    private float convertDpToPixels(int dp) {
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, metrics);
     }
 
 }
