@@ -37,6 +37,7 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
     private boolean mInit;
 
     protected View mView;
+    protected CardView mCardView;
     protected MaterialPreferenceChangeListener mListener;
     protected MaterialPreferenceClickListener mClickListener;
 
@@ -126,6 +127,9 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
 
         final int layoutResId = mPrefAsCard ? R.layout.material_prefs_card_preference : R.layout.material_prefs_preference;
         mView = getLayoutInflater().inflate(layoutResId, this, true);
+        if (mPrefAsCard) {
+            mCardView = (CardView) mView.findViewById(R.id.card_preference_root);
+        }
 
         mIcon = (ImageView) mView.findViewById(android.R.id.icon);
         mTitle = (TextView) mView.findViewById(android.R.id.title);
@@ -234,8 +238,8 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
     }
 
     @Override public void setBackgroundColor(int color) {
-        if (mView instanceof CardView) {
-            ((CardView) mView).setCardBackgroundColor(color);
+        if (mCardView != null) {
+            mCardView.setCardBackgroundColor(color);
         } else {
             super.setBackgroundColor(color);
         }

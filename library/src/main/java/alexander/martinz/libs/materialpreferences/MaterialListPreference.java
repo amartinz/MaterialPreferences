@@ -258,7 +258,8 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
 
     @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // we have set a value, do not fire the listener
-        if (mSpinner.getTag() == position) {
+        final Object tag = mSpinner.getTag();
+        if (tag != null && tag.equals(position)) {
             return;
         }
 
