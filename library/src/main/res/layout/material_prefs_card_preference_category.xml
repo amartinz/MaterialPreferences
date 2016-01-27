@@ -22,7 +22,7 @@
     style="@style/CardView.Light"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    android:layout_margin="@dimen/material_prefs_card_margin"
     android:foreground="?android:attr/selectableItemBackground"
     android:minHeight="72dp"
     card_view:cardCornerRadius="4dp"
