@@ -54,7 +54,7 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
     private String mValue;
 
     protected int getSpinnerItemResId() {
-        return R.layout.material_item_spinner_content;
+        return R.layout.material_prefs_item_spinner_content;
     }
 
     protected int getSpinnerDropdownItemResId() {
@@ -100,7 +100,7 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
             }
         }
         if (mSpinner == null) {
-            mSpinner = (Spinner) getLayoutInflater().inflate(R.layout.material_item_spinner, this, false);
+            mSpinner = (Spinner) getLayoutInflater().inflate(R.layout.material_prefs_item_spinner, this, false);
             mSpinner.setAdapter(mSpinnerAdapter);
             if (!TextUtils.isEmpty(mDefaultValue)) {
                 mSpinner.setSelection(mSpinnerAdapter.getPosition(mDefaultValue));
