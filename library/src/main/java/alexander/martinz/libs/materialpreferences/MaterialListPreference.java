@@ -244,7 +244,16 @@ public class MaterialListPreference extends MaterialPreference implements View.O
     }
 
     @Override public void onValueSelected(Object value) {
-        final String realValue = String.valueOf(value);
+        final String stringValue = String.valueOf(value);
+        String realValue = stringValue;
+        if (mEntries != null && mEntryValues != null && mEntries.length == mEntryValues.length) {
+            for (int i = 0; i < mEntries.length; i++) {
+                if (TextUtils.equals(mEntries[i], stringValue)) {
+                    realValue = String.valueOf(mEntryValues[i]);
+                }
+            }
+        }
+
         if (mListener != null) {
             if (mListener.onPreferenceChanged(this, realValue)) {
                 mValue = realValue;
