@@ -14,8 +14,9 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<Spinner
+<alexander.martinz.libs.materialpreferences.views.AwesomeSpinner
     style="@style/Widget.AppCompat.Spinner.Underlined"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+    android:layout_height="wrap_content"
+    android:minWidth="@dimen/material_prefs_spinner_min_width" />

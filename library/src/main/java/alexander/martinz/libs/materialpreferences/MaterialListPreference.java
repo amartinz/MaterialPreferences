@@ -20,25 +20,22 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
 
-public class MaterialListPreference extends MaterialPreference implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+import alexander.martinz.libs.materialpreferences.views.AwesomeSpinner;
+
+public class MaterialListPreference extends MaterialPreference implements View.OnClickListener, AwesomeSpinner.OnValueSelectedListener {
     private boolean mInit;
 
-    private ArrayAdapter<CharSequence> mSpinnerAdapter;
-    private Spinner mSpinner;
-
-    private TextView mSpinnerTextView;
-    private int mSpinnerTextViewColor = -1;
+    private ArrayAdapter<CharSequence> spinnerAdapter;
+    private AwesomeSpinner awesomeSpinner;
 
     private String mDefaultValue;
     private int mDefaultIndex;
@@ -55,10 +52,6 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
 
     protected int getSpinnerItemResId() {
         return R.layout.material_prefs_item_spinner_content;
-    }
-
-    protected int getSpinnerDropdownItemResId() {
-        return android.R.layout.simple_spinner_dropdown_item;
     }
 
     public MaterialListPreference(Context context) {
@@ -90,35 +83,33 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
             return false;
         }
 
-        if (mSpinnerAdapter == null) {
+        if (spinnerAdapter == null) {
             if (mEntriesResId != -1) {
-                mSpinnerAdapter = ArrayAdapter.createFromResource(context,
-                        mEntriesResId, getSpinnerItemResId());
-                mSpinnerAdapter.setDropDownViewResource(getSpinnerDropdownItemResId());
+                final CharSequence[] entries = getResources().getTextArray(mEntriesResId);
+                spinnerAdapter = createAdapter(entries);
             } else if (mEntries != null) {
-                mSpinnerAdapter = createAdapter(mEntries, mEntryValues);
+                spinnerAdapter = createAdapter(mEntries, mEntryValues);
             }
         }
-        if (mSpinner == null) {
-            mSpinner = (Spinner) getLayoutInflater().inflate(R.layout.material_prefs_item_spinner, this, false);
-            mSpinner.setAdapter(mSpinnerAdapter);
+        if (awesomeSpinner == null) {
+            awesomeSpinner = (AwesomeSpinner) getLayoutInflater().inflate(R.layout.material_prefs_item_spinner, this, false);
+            awesomeSpinner.setAdapter(spinnerAdapter);
             if (!TextUtils.isEmpty(mDefaultValue)) {
-                mSpinner.setSelection(mSpinnerAdapter.getPosition(mDefaultValue));
+                awesomeSpinner.setText(spinnerAdapter.getPosition(mDefaultValue));
             } else if (mDefaultIndex != -1) {
-                mSpinner.setSelection(mDefaultIndex);
+                awesomeSpinner.setText(spinnerAdapter.getItem(mDefaultIndex));
             }
             if (mPlaceOnBottom) {
-                addToWidgetFrameBottom(mSpinner);
+                addToWidgetFrameBottom(awesomeSpinner);
             } else {
-                addToWidgetFrame(mSpinner);
+                addToWidgetFrame(awesomeSpinner);
             }
 
             // spinners are ... weird, to prevent the listener from getting called we have to set it
             // after the spinner is fully initialized
-            mSpinner.post(new Runnable() {
+            awesomeSpinner.post(new Runnable() {
                 @Override public void run() {
-                    mSpinnerTextView = null;
-                    mSpinner.setOnItemSelectedListener(MaterialListPreference.this);
+                    awesomeSpinner.setOnValueSelectedListener(MaterialListPreference.this);
                 }
             });
         }
@@ -165,27 +156,23 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
     }
 
     public void setAdapter(ArrayAdapter<CharSequence> adapter) {
-        mSpinnerAdapter = adapter;
-        mSpinner.setAdapter(mSpinnerAdapter);
+        spinnerAdapter = adapter;
+        if (awesomeSpinner.isPopupShowing()) {
+            awesomeSpinner.dismissDropDown();
+        }
+        awesomeSpinner.setAdapter(spinnerAdapter);
     }
 
-    @NonNull public Spinner getSpinner() {
-        return mSpinner;
+    @NonNull public AwesomeSpinner getSpinner() {
+        return awesomeSpinner;
     }
 
     @Nullable public ArrayAdapter<CharSequence> getSpinnerAdapter() {
-        return mSpinnerAdapter;
+        return spinnerAdapter;
     }
 
-    @Nullable public TextView getSpinnerTextView() {
-        return mSpinnerTextView;
-    }
-
-    public <T extends MaterialPreference> T setSpinnerTextViewColor(int color) {
-        mSpinnerTextViewColor = color;
-        if (mSpinnerTextView != null && color != -1) {
-            mSpinnerTextView.setTextColor(mSpinnerTextViewColor);
-        }
+    public <T extends MaterialPreference> T setSpinnerTextViewColor(@ColorInt int color) {
+        awesomeSpinner.setTextColor(color);
         return (T) this;
     }
 
@@ -205,22 +192,20 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
                 }
             }
         }
-        if (position == -1) {
-            position = mSpinnerAdapter.getPosition(mValue);
-        }
-        if (position != -1) {
-            // set a tag to prevent the onitemselected listener from triggering
-            mSpinner.setTag(position);
-            mSpinner.setSelection(position);
+
+        if (position != -1 && position < mEntries.length) {
+            awesomeSpinner.setText(mEntries[position]);
         }
         return (T) this;
     }
 
     public <T extends MaterialPreference> T setValueIndex(int index) {
-        String value = String.valueOf(mSpinnerAdapter.getItem(index));
+        final String value = String.valueOf(spinnerAdapter.getItem(index));
         if (!TextUtils.isEmpty(value)) {
             mValue = value;
-            mSpinner.setSelection(index);
+            if (index != -1 && index < mEntries.length) {
+                awesomeSpinner.setText(mEntries[index]);
+            }
         }
         return (T) this;
     }
@@ -250,40 +235,20 @@ public class MaterialListPreference extends MaterialPreference implements Adapte
     public ArrayAdapter<CharSequence> createAdapter(CharSequence[] entries, CharSequence[] values) {
         mEntries = entries;
         mEntryValues = values;
-
-        final ArrayAdapter<CharSequence> arrayAdapter = new ArrayAdapter<>(getContext(), getSpinnerItemResId(), entries);
-        arrayAdapter.setDropDownViewResource(getSpinnerDropdownItemResId());
-        return arrayAdapter;
-    }
-
-    @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // we have set a value, do not fire the listener
-        final Object tag = mSpinner.getTag();
-        if (tag != null && tag.equals(position)) {
-            return;
-        }
-
-        final String value;
-        if (mEntryValues != null && position < mEntryValues.length) {
-            value = String.valueOf(mEntryValues[position]);
-        } else {
-            value = String.valueOf(mSpinnerAdapter.getItem(position));
-        }
-        if (mListener != null) {
-            if (mListener.onPreferenceChanged(this, value)) {
-                mValue = value;
-            }
-        }
-
-        mSpinner.setTag(position);
-    }
-
-    @Override public void onNothingSelected(AdapterView<?> parent) {
-        // nothing to be done?
+        return new ArrayAdapter<>(getContext(), getSpinnerItemResId(), mEntries);
     }
 
     @Override public void onClick(View v) {
         super.onClick(v);
-        mSpinner.performClick();
+        awesomeSpinner.performClick();
+    }
+
+    @Override public void onValueSelected(Object value) {
+        final String realValue = String.valueOf(value);
+        if (mListener != null) {
+            if (mListener.onPreferenceChanged(this, realValue)) {
+                mValue = realValue;
+            }
+        }
     }
 }

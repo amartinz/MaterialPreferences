@@ -17,12 +17,15 @@
 ** limitations under the License.
 */
 -->
-<TextView android:id="@android:id/text1"
-    style="?android:attr/spinnerItemStyle"
+<android.support.v7.widget.AppCompatTextView
+    android:id="@android:id/text1"
+    style="?android:attr/dropDownItemStyle"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:ellipsize="marquee"
+    android:minHeight="40dp"
+    android:scrollHorizontally="true"
     android:singleLine="true"
     android:textAlignment="inherit"
-    android:textColor="?colorAccent" />
+    android:textIsSelectable="false" />
