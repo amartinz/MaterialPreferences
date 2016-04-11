@@ -15,6 +15,9 @@
   ~ limitations under the License.
   -->
 <resources>
+    <dimen name="material_prefs_card_corner_radius">4dp</dimen>
+    <dimen name="material_prefs_card_content_padding">4dp</dimen>
+    <dimen name="material_prefs_card_elevation">4dp</dimen>
     <dimen name="material_prefs_card_margin">6dp</dimen>
 
     <dimen name="material_prefs_spinner_min_width">120dp</dimen>

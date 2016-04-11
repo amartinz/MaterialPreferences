@@ -25,9 +25,9 @@
     android:layout_margin="@dimen/material_prefs_card_margin"
     android:foreground="?android:attr/selectableItemBackground"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
-    card_view:cardCornerRadius="4dp"
-    card_view:cardElevation="4dp"
-    card_view:contentPadding="5dp">
+    card_view:cardCornerRadius="@dimen/material_prefs_card_corner_radius"
+    card_view:cardElevation="@dimen/material_prefs_card_elevation"
+    card_view:contentPadding="@dimen/material_prefs_card_content_padding">
 
     <LinearLayout
         android:id="@+id/card_preference_container"
