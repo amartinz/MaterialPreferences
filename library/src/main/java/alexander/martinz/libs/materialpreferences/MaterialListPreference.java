@@ -56,6 +56,7 @@ public class MaterialListPreference extends MaterialPreference implements View.O
 
     public MaterialListPreference(Context context) {
         super(context);
+        mDefaultIndex = -1;
         mEntriesResId = -1;
         mEntryValuesResId = -1;
     }
@@ -94,10 +95,12 @@ public class MaterialListPreference extends MaterialPreference implements View.O
         if (awesomeSpinner == null) {
             awesomeSpinner = (AwesomeSpinner) getLayoutInflater().inflate(R.layout.material_prefs_item_spinner, this, false);
             awesomeSpinner.setAdapter(spinnerAdapter);
-            if (!TextUtils.isEmpty(mDefaultValue)) {
-                awesomeSpinner.setText(spinnerAdapter.getPosition(mDefaultValue));
-            } else if (mDefaultIndex != -1) {
-                awesomeSpinner.setText(spinnerAdapter.getItem(mDefaultIndex));
+            if (spinnerAdapter != null) {
+                if (!TextUtils.isEmpty(mDefaultValue)) {
+                    awesomeSpinner.setText(spinnerAdapter.getPosition(mDefaultValue));
+                } else if (mDefaultIndex != -1) {
+                    awesomeSpinner.setText(spinnerAdapter.getItem(mDefaultIndex));
+                }
             }
             if (mPlaceOnBottom) {
                 addToWidgetFrameBottom(awesomeSpinner);
@@ -115,7 +118,6 @@ public class MaterialListPreference extends MaterialPreference implements View.O
         }
 
         setOnClickListener(this);
-
         return true;
     }
 
