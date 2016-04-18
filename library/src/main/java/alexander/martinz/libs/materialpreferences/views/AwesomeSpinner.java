@@ -59,7 +59,9 @@ public class AwesomeSpinner extends AppCompatAutoCompleteTextView implements Ada
         if (isPopupShowing()) {
             dismissDropDown();
         } else {
-            performFiltering("", 0);
+            if (getFilter() != null) {
+                performFiltering("", 0);
+            }
             showDropDown();
         }
     }
