@@ -19,6 +19,7 @@
     <declare-styleable name="MaterialPreference">
         <attr name="prefKey" format="string" />
         <attr name="prefIcon" format="reference" />
+        <attr name="prefIconTint" format="color" />
         <attr name="prefTitle" format="reference" />
         <attr name="prefSummary" format="reference" />
         <attr name="prefAsCard" format="boolean" />

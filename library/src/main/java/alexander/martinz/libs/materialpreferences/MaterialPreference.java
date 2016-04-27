@@ -19,9 +19,13 @@ package alexander.martinz.libs.materialpreferences;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.LightingColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -52,6 +56,7 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
     // only useful to modify if the general constructor is used and manually init'ed
     protected boolean mPrefAsCard;
     protected int mResIdIcon;
+    protected int mIconTintColor;
     protected int mResIdTitle;
     protected int mResIdSummary;
     protected int mCardBackgroundColor;
@@ -86,6 +91,7 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
         mPrefKey = key;
         mPrefAsCard = false;
         mResIdIcon = -1;
+        mIconTintColor = Integer.MIN_VALUE;
         mResIdTitle = -1;
         mResIdSummary = -1;
     }
@@ -138,7 +144,12 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
         mWidgetFrameBottom = (LinearLayout) mView.findViewById(R.id.widget_frame_bottom);
 
         if (mResIdIcon != -1 && mIcon != null) {
-            mIcon.setImageResource(mResIdIcon);
+            Drawable d = ContextCompat.getDrawable(context, mResIdIcon);
+            if (d != null && mIconTintColor != Integer.MIN_VALUE) {
+                d = d.mutate();
+                d.setColorFilter(new LightingColorFilter(Color.BLACK, mIconTintColor));
+            }
+            mIcon.setImageDrawable(d);
             mIcon.setVisibility(View.VISIBLE);
         }
         if (mResIdTitle != -1) {
@@ -172,6 +183,7 @@ public class MaterialPreference extends LinearLayout implements View.OnClickList
         mPrefKey = a.getString(R.styleable.MaterialPreference_prefKey);
         mPrefAsCard = a.getBoolean(R.styleable.MaterialPreference_prefAsCard, false);
         mResIdIcon = a.getResourceId(R.styleable.MaterialPreference_prefIcon, -1);
+        mIconTintColor = a.getColor(R.styleable.MaterialPreference_prefIconTint, Integer.MIN_VALUE);
         mResIdTitle = a.getResourceId(R.styleable.MaterialPreference_prefTitle, -1);
         mResIdSummary = a.getResourceId(R.styleable.MaterialPreference_prefSummary, -1);
 
