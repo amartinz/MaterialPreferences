@@ -87,7 +87,7 @@ public class MaterialListPreference extends MaterialPreference implements View.O
         if (spinnerAdapter == null) {
             if (mEntriesResId != -1) {
                 final CharSequence[] entries = getResources().getTextArray(mEntriesResId);
-                spinnerAdapter = createAdapter(entries);
+                spinnerAdapter = createAdapter(entries, mEntryValues);
             } else if (mEntries != null) {
                 spinnerAdapter = createAdapter(mEntries, mEntryValues);
             }
